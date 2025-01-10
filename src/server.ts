@@ -1,18 +1,15 @@
 import express, {Express, Request, Response} from "express";
 import {InteractionResponseType, InteractionType, verifyKeyMiddleware} from "discord-interactions";
-import {installCommands} from './utils'
+import {CommandsInstaller} from './commandsInstaller'
 
 export const Server = {
     start: (): void => {
         const app: Express = express();
         const port = process.env.PORT || 3000;
         const publicKey: string = process.env.PUBLIC_KEY || "not-defined";
-        const appId: string = process.env.APPLICATION_ID || "not-defined";
 
         app.listen(port, () => {
-            installCommands(appId)
-                .then(() => console.log("Commands successfully installed"))
-                .catch(err => console.error(`Error installing commands: ${err}`));
+            CommandsInstaller.install()
             console.log(`[server]: Server is running at http://localhost:${port}`);
         });
 

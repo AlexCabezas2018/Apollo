@@ -1,8 +1,8 @@
 {
   "commands": [
     {
-      "name": "test",
-      "description": "Basic command",
+      "name": "hello",
+      "description": "It just a test command",
       "type": 1,
       "integration_types": [
         0,
