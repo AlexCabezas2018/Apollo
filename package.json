@@ -12,7 +12,8 @@
     "express": "^4.18.2"
   },
   "devDependencies": {
-    "fs": "^0.0.1-security",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.5",
     "nodemon": "^3.0.0",
     "typescript": "^5.5.3"
   },
