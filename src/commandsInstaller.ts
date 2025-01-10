@@ -1,4 +1,7 @@
 import {DiscordRequests} from "./utils/discordRequest";
+import fs from "fs";
+
+const COMMANDS_PATH = "priv/commands.json";
 
 export const CommandsInstaller = {
     install: (): void => {
@@ -9,15 +12,7 @@ export const CommandsInstaller = {
         // API endpoint to overwrite global commands
         const endpoint = `applications/${appId}/commands`;
 
-        const commands: any[] = [
-            {
-                name: 'hello',
-                description: 'It just a test command',
-                type: 1,
-                integration_types: [0, 1],
-                contexts: [0, 1, 2],
-            }
-        ];
+        const {commands} = JSON.parse(fs.readFileSync(COMMANDS_PATH));
 
         DiscordRequests.execute(endpoint, {method: 'PUT', body: commands})
             .then(() => console.log("Commands successfully installed"))
