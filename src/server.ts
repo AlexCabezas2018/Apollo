@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from "express";
+import express, {Express, Request, Response} from "express";
 
 export default class Server {
     start(): void {
@@ -14,10 +14,3 @@ export default class Server {
         });
     }
 }
-
-
-
-
-
-
-
