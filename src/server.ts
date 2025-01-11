@@ -1,6 +1,5 @@
 import express, {Express, Request, Response} from "express";
 import {InteractionResponseType, InteractionType, verifyKeyMiddleware} from "discord-interactions";
-import {CommandsInstaller} from './commandsInstaller'
 import {Logger} from './utils/logger';
 import {Config} from "../config";
 
@@ -10,7 +9,6 @@ export const Server = {
         const port = Config.port;
 
         app.listen(port, () => {
-            CommandsInstaller.install()
             Logger.info(`[server]: Server is running at http://localhost:${port}`);
         });
 
