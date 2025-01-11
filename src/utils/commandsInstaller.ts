@@ -1,16 +1,16 @@
-import {DiscordRequests} from "./discordRequest";
 import commands from '../../priv/commands.json'
 import {Config} from '../../config'
 import {Logger} from './logger';
+import {REST, Routes} from 'discord.js';
 
 const CommandsInstaller = {
     install: (): void => {
-        Logger.info("Registering commands")
-        // API endpoint to overwrite global commands
-        const endpoint = `applications/${Config.applicationId}/commands`;
+        Logger.info("Registering commands...")
 
-        DiscordRequests.execute(endpoint, {method: 'PUT', body: commands.commands})
-            .then(() => Logger.info("Commands successfully installed"))
+        const rest = new REST({version: '10'}).setToken(Config.botToken)
+
+        rest.put(Routes.applicationCommands(Config.applicationId), {body: commands.commands})
+            .then(() => Logger.info("Commands successfully registered"))
             .catch(err => Logger.error(`Error installing commands: ${err}`));
     }
 }
