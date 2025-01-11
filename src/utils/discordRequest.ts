@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import {Config} from '../../config'
 
 export const DiscordRequests = {
     execute: async (endpoint: string, options: any): Promise<Response> => {
@@ -9,7 +10,7 @@ export const DiscordRequests = {
         // Use fetch to make requests
         const res = await fetch(url, {
             headers: {
-                Authorization: `Bot ${process.env.BOT_TOKEN}`,
+                Authorization: `Bot ${Config.botToken}`,
                 'Content-Type': 'application/json; charset=UTF-8',
                 'User-Agent': 'DiscordBot (https://github.com/discord/discord-example-app, 1.0.0)',
             },
