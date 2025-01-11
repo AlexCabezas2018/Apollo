@@ -1,10 +1,11 @@
 import {DiscordRequests} from "./utils/discordRequest";
 import commands from '../priv/commands.json'
+import {Config} from '../config'
 import {Logger} from './utils/logger';
 
 export const CommandsInstaller = {
     install: (): void => {
-        const appId = process.env.APPLICATION_ID;
+        const appId = Config.applicationId;
 
         // API endpoint to overwrite global commands
         const endpoint = `applications/${appId}/commands`;
