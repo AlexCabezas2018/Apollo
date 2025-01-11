@@ -1,5 +1,6 @@
 import {Client, Events, GatewayIntentBits} from 'discord.js';
 import {Config} from "../config";
+import PlayCommand from "./commands/PlayCommand";
 
 export const Server = {
     start: async (): Promise<void> => {
@@ -11,8 +12,7 @@ export const Server = {
             if (interaction.commandName == "hello") {
                 await interaction.reply("Hello World!!")
             } else if (interaction.commandName == "play") {
-                console.log(interaction.options.getString("url"))
-                await interaction.reply("I'm on it!!")
+                await new PlayCommand().execute(interaction)
             }
         });
 
