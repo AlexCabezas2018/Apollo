@@ -1,6 +1,7 @@
 import express, {Express, Request, Response} from "express";
 import {InteractionResponseType, InteractionType, verifyKeyMiddleware} from "discord-interactions";
 import {CommandsInstaller} from './commandsInstaller'
+import {Logger} from './utils/logger';
 
 export const Server = {
     start: (): void => {
@@ -10,7 +11,7 @@ export const Server = {
 
         app.listen(port, () => {
             CommandsInstaller.install()
-            console.log(`[server]: Server is running at http://localhost:${port}`);
+            Logger.info(`[server]: Server is running at http://localhost:${port}`);
         });
 
         app.post("/interactions", verifyKeyMiddleware(publicKey), (req: Request, res: Response) => {
