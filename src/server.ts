@@ -29,6 +29,18 @@ export const Server = {
                     });
                     return;
                 }
+
+                if (commandName == "play") {
+                    const url = data.options[0].value
+                    res.send({
+                        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+                        data: {
+                            content: `Okay, I will play ${url}!`,
+                        },
+                    });
+
+                    return;
+                }
             }
 
             res.status(400).json({error: 'unknown command'});
