@@ -1,8 +1,6 @@
 import winston, {format} from "winston";
 
-
-const {printf} = format
-const customFormat = printf(({level, message, timestamp}) => {
+const customFormat = format.printf(({level, message, timestamp}) => {
     return `${timestamp} [${level.toUpperCase()}] ${message}`;
 });
 
