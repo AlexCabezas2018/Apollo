@@ -4,7 +4,7 @@ import PlayCommand from "./commands/PlayCommand";
 
 export const Server = {
     start: async (): Promise<void> => {
-        const client = new Client({intents: [GatewayIntentBits.Guilds]});
+        const client = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates]});
 
         client.on(Events.InteractionCreate, async interaction => {
             if (!interaction.isChatInputCommand()) return;

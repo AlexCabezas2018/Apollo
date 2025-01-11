@@ -9,6 +9,7 @@
     "register": "npx ts-node src/utils/commandsInstaller.ts"
   },
   "dependencies": {
+    "@discordjs/voice": "^0.18.0",
     "discord.js": "^14.17.3",
     "dotenv": "^16.0.3"
   },
