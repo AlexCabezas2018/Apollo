@@ -1,15 +1,15 @@
 import DiscordAudioPlayer from "./DiscordAudioPlayer";
 
 export default class AudioPlayers {
-    private players: Map<string, DiscordAudioPlayer>;
     static instance: AudioPlayers
+    private players: Map<string, DiscordAudioPlayer>;
 
     constructor() {
         this.players = new Map();
     }
 
     static getInstance() {
-        if(!this.instance) this.instance = new AudioPlayers();
+        if (!this.instance) this.instance = new AudioPlayers();
         return this.instance;
     }
 

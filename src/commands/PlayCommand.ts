@@ -1,5 +1,5 @@
 import {ChatInputCommandInteraction, Client, MessageFlagsBitField} from "discord.js";
-import {AudioPlayer, createAudioResource, getVoiceConnection, joinVoiceChannel} from "@discordjs/voice";
+import {createAudioResource, getVoiceConnection, joinVoiceChannel} from "@discordjs/voice";
 
 import Command from "./Command";
 import {Config} from "../../config"
@@ -45,7 +45,7 @@ export default class PlayCommand extends Command {
 
         const cachedAudioPlayer = AudioPlayers.getInstance().getPlayer(interaction.guildId)
 
-        if(!cachedAudioPlayer) {
+        if (!cachedAudioPlayer) {
             const audioPlayer = new DiscordAudioPlayer(voiceConnection);
             AudioPlayers.getInstance().addPlayer(interaction.guildId, audioPlayer);
             audioPlayer.play(audioResource);
