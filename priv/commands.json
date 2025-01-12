@@ -17,6 +17,11 @@
           "required": true
         }
       ]
+    },
+    {
+      "name": "stop",
+      "description": "It stops the music",
+      "type": 1
     }
   ]
 }
