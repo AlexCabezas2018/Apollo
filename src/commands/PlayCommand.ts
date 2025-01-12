@@ -1,7 +1,7 @@
 import {ChatInputCommandInteraction, Client, MessageFlagsBitField} from "discord.js";
-import Command from "./Command";
+import {createAudioResource, getVoiceConnection, joinVoiceChannel} from "@discordjs/voice";
 
-import {createAudioResource, joinVoiceChannel} from "@discordjs/voice";
+import Command from "./Command";
 import {Config} from "../../config"
 import SimpleAudioPlayer from "../audioplayer/SimpleAudioPlayer";
 
@@ -24,7 +24,17 @@ export default class PlayCommand extends Command {
             return;
         }
 
-        const voiceConnection = joinVoiceChannel({
+        let voiceConnection = getVoiceConnection(interaction.guildId)
+
+        if (voiceConnection && voiceConnection.joinConfig.channelId != channel.id) {
+            await interaction.reply({
+                content: "I'm already in another channel. Please wait until it's not used.",
+                flags: MessageFlagsBitField.Flags.Ephemeral
+            })
+            return;
+        }
+
+        voiceConnection = voiceConnection || joinVoiceChannel({
             channelId: channel.id,
             guildId: interaction.guildId,
             adapterCreator: interaction.guild?.voiceAdapterCreator
