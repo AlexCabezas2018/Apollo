@@ -1,9 +1,10 @@
 import {ChatInputCommandInteraction, Client, MessageFlagsBitField} from "discord.js";
-import {createAudioResource, getVoiceConnection, joinVoiceChannel} from "@discordjs/voice";
+import {AudioPlayer, createAudioResource, getVoiceConnection, joinVoiceChannel} from "@discordjs/voice";
 
 import Command from "./Command";
 import {Config} from "../../config"
-import SimpleAudioPlayer from "../audioplayer/SimpleAudioPlayer";
+import DiscordAudioPlayer from "../audioplayer/DiscordAudioPlayer";
+import AudioPlayers from "../audioplayer/AudioPlayers";
 
 export default class PlayCommand extends Command {
 
@@ -42,12 +43,16 @@ export default class PlayCommand extends Command {
 
         const audioResource = createAudioResource(Config.sampleAudioPath)
 
-        const simpleAudioPlayer = new SimpleAudioPlayer(
-            voiceConnection,
-            audioResource
-        );
+        const cachedAudioPlayer = AudioPlayers.getInstance().getPlayer(interaction.guildId)
 
-        simpleAudioPlayer.play()
+        if(!cachedAudioPlayer) {
+            const audioPlayer = new DiscordAudioPlayer(voiceConnection);
+            AudioPlayers.getInstance().addPlayer(interaction.guildId, audioPlayer);
+            audioPlayer.play(audioResource);
+        } else {
+            cachedAudioPlayer.update(voiceConnection);
+            cachedAudioPlayer.play(audioResource);
+        }
 
         await interaction.reply("I'm playing a sample!")
     }
