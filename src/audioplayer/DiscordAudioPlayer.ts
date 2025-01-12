@@ -1,4 +1,10 @@
-import {AudioPlayer, AudioPlayerStatus, createAudioPlayer, VoiceConnection} from "@discordjs/voice";
+import {
+    AudioPlayer,
+    AudioPlayerStatus,
+    createAudioPlayer,
+    VoiceConnection,
+    VoiceConnectionStatus
+} from "@discordjs/voice";
 import {Logger} from "../utils/logger";
 
 export default abstract class DiscordAudioPlayer {
@@ -8,6 +14,10 @@ export default abstract class DiscordAudioPlayer {
     protected constructor(voiceConnection: VoiceConnection) {
         this.voiceConnection = voiceConnection;
         this.audioPlayer = createAudioPlayer();
+
+        this.voiceConnection.on(VoiceConnectionStatus.Disconnected, () =>
+            this.voiceConnection.destroy()
+        )
 
         this.audioPlayer.on('error', error => {
             Logger.error(error);
