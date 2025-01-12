@@ -1,6 +1,6 @@
 import {Client, Events, GatewayIntentBits} from 'discord.js';
 import {Config} from "../config";
-import PlayCommand from "./commands/PlayCommand";
+import {COMMANDS} from "./commands/AvailableCommands";
 
 export const Server = {
     start: async (): Promise<void> => {
@@ -9,11 +9,13 @@ export const Server = {
         client.on(Events.InteractionCreate, async interaction => {
             if (!interaction.isChatInputCommand()) return;
 
-            if (interaction.commandName == "hello") {
-                await interaction.reply("Hello World!!")
-            } else if (interaction.commandName == "play") {
-                await new PlayCommand().execute(interaction)
+            const command = COMMANDS.get(interaction.commandName)
+            if (!command) {
+                await interaction.reply("Command not found.")
+                return;
             }
+
+            command.execute(client, interaction)
         });
 
         await client.login(Config.botToken)
