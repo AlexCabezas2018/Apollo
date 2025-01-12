@@ -1,7 +1,9 @@
 import {ChatInputCommandInteraction, Client, MessageFlagsBitField} from "discord.js";
 import Command from "./Command";
 
-import {joinVoiceChannel} from "@discordjs/voice";
+import {createAudioResource, joinVoiceChannel} from "@discordjs/voice";
+import {Config} from "../../config"
+import SimpleAudioPlayer from "../audioplayer/SimpleAudioPlayer";
 
 export default class PlayCommand extends Command {
 
@@ -12,7 +14,9 @@ export default class PlayCommand extends Command {
         }
 
         // @ts-ignore
-        if (!interaction.member.voice.channel) {
+        const channel = interaction.member.voice.channel;
+
+        if (!channel) {
             await interaction.reply({
                 content: "You must be in a voice channel to call me!",
                 flags: MessageFlagsBitField.Flags.Ephemeral
@@ -21,16 +25,20 @@ export default class PlayCommand extends Command {
         }
 
         const voiceConnection = joinVoiceChannel({
-            // @ts-ignore
-            channelId: interaction.member.voice.channel.id,
+            channelId: channel.id,
             guildId: interaction.guildId,
             adapterCreator: interaction.guild?.voiceAdapterCreator
         })
 
-        // Just for testing purposes. It will leave in 10 seconds
-        setTimeout(() => voiceConnection.disconnect(), 10000)
+        const audioResource = createAudioResource(Config.sampleAudioPath)
 
-        const url = interaction.options.data[0].value
-        await interaction.reply(`I'm playing ${url}`)
+        const simpleAudioPlayer = new SimpleAudioPlayer(
+            voiceConnection,
+            audioResource
+        );
+
+        simpleAudioPlayer.play()
+
+        await interaction.reply("I'm playing a sample!")
     }
 }

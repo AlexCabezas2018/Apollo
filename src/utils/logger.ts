@@ -6,6 +6,8 @@ const customFormat = format.printf(({level, message, timestamp}) => {
 
 export const Logger = winston.createLogger({
     transports: [new winston.transports.Console()],
+    // Enable it to see debug logs.
+    // level: "debug",
     format: winston.format.combine(
         winston.format.timestamp(),
         customFormat,
