@@ -1,11 +1,11 @@
-import {ChatInputCommandInteraction} from "discord.js";
+import {ChatInputCommandInteraction, Client} from "discord.js";
 import Command from "./Command";
 
 import {joinVoiceChannel} from "@discordjs/voice";
 
 export default class PlayCommand extends Command {
 
-    async execute(interaction: ChatInputCommandInteraction): Promise<void> {
+    async execute(client: Client, interaction: ChatInputCommandInteraction): Promise<void> {
         if (!interaction.guild || interaction.guildId == null || !interaction.member) {
             await interaction.reply("Unexpected problem. Talk to a bot admin.")
             return;

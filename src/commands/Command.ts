@@ -1,5 +1,5 @@
-import {CommandInteraction} from "discord.js";
+import {Client, CommandInteraction} from "discord.js";
 
 export default abstract class Command {
-    abstract execute(interaction: CommandInteraction): void
+    abstract execute(client: Client, interaction: CommandInteraction): void
 }
