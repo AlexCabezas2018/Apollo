@@ -1,4 +1,4 @@
-import {ChatInputCommandInteraction, Client} from "discord.js";
+import {ChatInputCommandInteraction, Client, MessageFlagsBitField} from "discord.js";
 import Command from "./Command";
 
 import {joinVoiceChannel} from "@discordjs/voice";
@@ -13,7 +13,10 @@ export default class PlayCommand extends Command {
 
         // @ts-ignore
         if (!interaction.member.voice.channel) {
-            await interaction.reply("You must be in a voice channel to call me!")
+            await interaction.reply({
+                content: "You must be in a voice channel to call me!",
+                flags: MessageFlagsBitField.Flags.Ephemeral
+            })
             return;
         }
 
