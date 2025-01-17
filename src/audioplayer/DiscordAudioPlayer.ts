@@ -51,7 +51,7 @@ export default class DiscordAudioPlayer {
 
         this.audioPlayer.on(AudioPlayerStatus.Idle, () => {
             Logger.debug("Player has no more music to play. Disconnecting.")
-            this.voiceConnection.destroy();
+            if (this.voiceConnection.state.status != VoiceConnectionStatus.Destroyed) this.voiceConnection.destroy();
             if (subscription) subscription.unsubscribe()
         })
 

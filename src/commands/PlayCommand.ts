@@ -2,9 +2,9 @@ import {ChatInputCommandInteraction, Client, MessageFlagsBitField} from "discord
 import {createAudioResource, getVoiceConnection, joinVoiceChannel} from "@discordjs/voice";
 
 import Command from "./Command";
-import {Config} from "../../config"
 import DiscordAudioPlayer from "../audioplayer/DiscordAudioPlayer";
 import AudioPlayers from "../audioplayer/AudioPlayers";
+import {AudioProviderResponseStatus, YoutubeAudioProvider} from "../provider/YoutubeAudioProvider";
 
 export default class PlayCommand extends Command {
 
@@ -35,13 +35,31 @@ export default class PlayCommand extends Command {
             return;
         }
 
+        const url = this.getUrl(interaction)
+        if (!url) {
+            await interaction.reply({
+                content: "No url provided. Please try again.",
+                flags: MessageFlagsBitField.Flags.Ephemeral
+            })
+            return;
+        }
+
+        const audioProviderResponse = await YoutubeAudioProvider.getAudio(url)
+        if (audioProviderResponse.status != AudioProviderResponseStatus.SUCCESS) {
+            await interaction.reply({
+                content: "Error while getting audio resource. Please try again.",
+                flags: MessageFlagsBitField.Flags.Ephemeral
+            })
+            return;
+        }
+
         voiceConnection = voiceConnection || joinVoiceChannel({
             channelId: channel.id,
             guildId: interaction.guildId,
             adapterCreator: interaction.guild?.voiceAdapterCreator
         })
 
-        const audioResource = createAudioResource(Config.sampleAudioPath)
+        const audioResource = createAudioResource(audioProviderResponse.audioData);
 
         const cachedAudioPlayer = AudioPlayers.getInstance().getPlayer(interaction.guildId)
 
@@ -54,6 +72,10 @@ export default class PlayCommand extends Command {
             cachedAudioPlayer.play(audioResource);
         }
 
-        await interaction.reply("I'm playing a sample!")
+        await interaction.reply(`Playing ${audioProviderResponse.name}!!`)
+    }
+
+    private getUrl(interaction: ChatInputCommandInteraction): string | undefined {
+        return String(interaction.options.data.find(option => option.name == "url")?.value)
     }
 }
