@@ -17,3 +17,7 @@ jobs:
       run: |
         npm install
         grunt
+
+    - name: Test
+      run: |
+        jest
