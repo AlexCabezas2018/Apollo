@@ -7,7 +7,8 @@
     "build": "tsc",
     "start": "npx ts-node index.ts",
     "register": "npx ts-node src/utils/CommandsInstaller.ts",
-    "test": "jest"
+    "test": "jest",
+    "format": "ts-standard"
   },
   "dependencies": {
     "@discordjs/voice": "^0.18.0",
