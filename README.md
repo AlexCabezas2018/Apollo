@@ -25,7 +25,7 @@ git clone https://github.com/AlexCabezas2018/apollo.git
 
 Next, you need to install the dependencies:
 ```
-cd discord-music-bot
+cd apollo
 npm install
 ```
 
