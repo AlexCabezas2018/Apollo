@@ -20,7 +20,7 @@ the bot backend will be operative.
 
 First, you need to download the project, as you may assume is as easy as:
 ```
-git clone https://github.com/AlexCabezas2018/apollo.git
+git clone https://github.com/alexcabezasg/apollo.git
 ```
 
 Next, you need to install the dependencies:
