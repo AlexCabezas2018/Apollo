@@ -21,6 +21,17 @@ jobs:
       - run: npm ci
       - run: npm run build
 
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Format checker
+        uses: actions/setup-node@v4
+        with:
+          cache: 'npm'
+      - run: npm ci
+      - run: tsfmt --verify
+
   test:
     runs-on: ubuntu-latest
     steps:
