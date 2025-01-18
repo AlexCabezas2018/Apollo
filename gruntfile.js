@@ -5,8 +5,7 @@ module.exports = function(grunt) {
                 options: {
                     additionalFlags: '--resolveJsonModule'
                 },
-                tsconfig: './tsconfig.json',
-                // src: ["src/**/*.ts", "*.ts"]
+                tsconfig: './tsconfig.json'
             }
         }
     });
