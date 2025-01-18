@@ -1,5 +1,5 @@
 import {Server} from './src/server';
-import {Logger} from './src/utils/logger'
+import {Logger} from './src/utils/Logger'
 
 Server.start()
     .then(() => Logger.info('[server] Server ready!'))

@@ -3,8 +3,7 @@ import 'dotenv/config'
 interface Config {
     applicationId: string,
     publicKey: string,
-    botToken: string,
-    sampleAudioPath: string
+    botToken: string
 }
 
 const evaluate = (value: any, isRequired: boolean, defValue?: any) => {
@@ -19,6 +18,5 @@ const evaluate = (value: any, isRequired: boolean, defValue?: any) => {
 export const Config: Config = {
     applicationId: evaluate(process.env.APPLICATION_ID, true),
     publicKey: evaluate(process.env.PUBLIC_KEY, true),
-    botToken: evaluate(process.env.BOT_TOKEN, true),
-    sampleAudioPath: evaluate(process.env.SAMPLE_AUDIO_PATH, false, ""),
+    botToken: evaluate(process.env.BOT_TOKEN, true)
 }

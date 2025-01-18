@@ -1,6 +1,6 @@
 import commands from '../../priv/commands.json'
 import {Config} from '../../config'
-import {Logger} from './logger';
+import {Logger} from './Logger';
 import {REST, Routes} from 'discord.js';
 
 const CommandsInstaller = {

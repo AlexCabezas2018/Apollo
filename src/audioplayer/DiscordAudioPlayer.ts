@@ -6,7 +6,7 @@ import {
     VoiceConnection,
     VoiceConnectionStatus
 } from "@discordjs/voice";
-import {Logger} from "../utils/logger";
+import {Logger} from "../utils/Logger";
 
 export default class DiscordAudioPlayer {
     protected voiceConnection: VoiceConnection;
