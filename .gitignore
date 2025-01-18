@@ -12,3 +12,6 @@ yarn-error.log*
 .idea
 .DS_Store
 .env
+
+/dist
+.tscache

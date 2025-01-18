@@ -2,7 +2,11 @@ module.exports = function(grunt) {
     grunt.initConfig({
         ts: {
             default : {
-                tsconfig: './tsconfig.json'
+                options: {
+                    additionalFlags: '--resolveJsonModule'
+                },
+                tsconfig: './tsconfig.json',
+                // src: ["src/**/*.ts", "*.ts"]
             }
         }
     });
