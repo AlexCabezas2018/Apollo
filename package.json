@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "start": "npx ts-node index.ts",
-    "register": "npx ts-node src/utils/CommandsInstaller.ts"
+    "register": "npx ts-node src/utils/CommandsInstaller.ts",
+    "test": "jest"
   },
   "dependencies": {
     "@discordjs/voice": "^0.18.0",
@@ -14,7 +15,6 @@
     "discord.js": "^14.17.3",
     "dotenv": "^16.0.3",
     "ffmpeg-static": "^5.2.0",
-    "grunt-ts": "^6.0.0-beta.22",
     "install": "^0.13.0",
     "npm": "^11.0.0",
     "ytdl-core": "npm:@distube/ytdl-core@^4.15.8"
@@ -22,8 +22,6 @@
   "devDependencies": {
     "@types/jest": "^29.5.14",
     "@types/node": "^22.10.5",
-    "grunt": "^1.6.1",
-    "grunt-contrib-uglify": "^5.2.2",
     "jest": "^29.7.0",
     "nodemon": "^3.0.0",
     "ts-jest": "^29.2.5",
