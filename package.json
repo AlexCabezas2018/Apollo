@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "npx ts-node index.ts",
-    "register": "npx ts-node src/utils/commandsInstaller.ts"
+    "register": "npx ts-node src/utils/CommandsInstaller.ts"
   },
   "dependencies": {
     "@discordjs/voice": "^0.18.0",
@@ -19,8 +19,11 @@
     "ytdl-core": "npm:@distube/ytdl-core@^4.15.8"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.14",
     "@types/node": "^22.10.5",
+    "jest": "^29.7.0",
     "nodemon": "^3.0.0",
+    "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.3",
     "winston": "^3.17.0"

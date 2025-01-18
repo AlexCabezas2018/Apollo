@@ -1,6 +1,6 @@
 import ytdl from "@distube/ytdl-core"
 import {Readable} from "node:stream";
-import {Logger} from "../utils/logger";
+import {Logger} from "../utils/Logger";
 
 export enum AudioProviderResponseStatus {
     SUCCESS = 0,
