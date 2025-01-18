@@ -8,7 +8,8 @@
     "start": "npx ts-node index.ts",
     "register": "npx ts-node src/utils/CommandsInstaller.ts",
     "test": "jest",
-    "format": "ts-standard"
+    "format-verify": "tsfmt --verify",
+    "format": "tsfmt -r"
   },
   "dependencies": {
     "@discordjs/voice": "^0.18.0",
@@ -18,6 +19,7 @@
     "ffmpeg-static": "^5.2.0",
     "install": "^0.13.0",
     "npm": "^11.0.0",
+    "typescript-formatter": "^7.2.2",
     "ytdl-core": "npm:@distube/ytdl-core@^4.15.8"
   },
   "devDependencies": {
@@ -27,7 +29,6 @@
     "nodemon": "^3.0.0",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
-    "ts-standard": "^12.0.2",
     "typescript": "^5.5.3",
     "winston": "^3.17.0"
   },
