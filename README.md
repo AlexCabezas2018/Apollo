@@ -1,4 +1,4 @@
-# 🎵🎹 Apollo: A backend for your Discord music bot
+# 🎵 🎹 Apollo: A backend for your Discord music bot
 Welcome to Apollo! This repository contains a backend ready to use with discord, so you can create custom
 music bots!
 
@@ -20,7 +20,7 @@ the bot backend will be operative.
 
 First, you need to download the project, as you may assume is as easy as:
 ```
-git clone https://github.com/AlexCabezas2018/apollo
+git clone https://github.com/AlexCabezas2018/apollo.git
 ```
 
 Next, you need to install the dependencies:
