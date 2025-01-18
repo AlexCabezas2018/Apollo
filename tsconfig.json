@@ -7,9 +7,15 @@
     "strict": true,
     "skipLibCheck": true,
     "outDir": "dist",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "rootDir": ".",
+    "newLine": "LF"
   },
   "include": [
-    "src"
+    "tests",
+    "src/**/*.ts",
+    "src/*.ts",
+    "index.ts",
+    "config.ts"
   ]
 }
