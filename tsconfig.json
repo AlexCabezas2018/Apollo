@@ -11,7 +11,9 @@
     "rootDir": "."
   },
   "include": [
+    "tests",
     "src/**/*.ts",
-    "src/*.ts"
+    "src/*.ts",
+    "index.ts"
   ]
 }

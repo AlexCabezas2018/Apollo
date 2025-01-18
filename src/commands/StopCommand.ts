@@ -1,39 +1,38 @@
-import {Client, CommandInteraction, MessageFlagsBitField} from "discord.js";
-import Command from "./Command";
-import AudioPlayers from "../audioplayer/AudioPlayers";
-import {getVoiceConnection} from "@discordjs/voice";
+import { Client, CommandInteraction, MessageFlagsBitField } from 'discord.js'
+import Command from './Command'
+import AudioPlayers from '../audioplayer/AudioPlayers'
+import { getVoiceConnection } from '@discordjs/voice'
 
 export default class StopCommand extends Command {
     async execute(client: Client, interaction: CommandInteraction): Promise<void> {
-        if (!interaction.guild || interaction.guildId == null || !interaction.member) {
-            await interaction.reply("Unexpected problem. Talk to a bot admin.")
-            return;
+        if ((interaction.guild == null) || interaction.guildId == null || (interaction.member == null)) {
+            await interaction.reply('Unexpected problem. Talk to a bot admin.')
+            return
         }
 
-        // @ts-ignore
-        const channel = interaction.member.voice.channel;
+        // @ts-expect-error
+        const channel = interaction.member.voice.channel
 
-        let voiceConnection = getVoiceConnection(interaction.guildId)
+        const voiceConnection = getVoiceConnection(interaction.guildId)
 
-        if ((voiceConnection && voiceConnection.joinConfig.channelId != channel.id) || !channel) {
+        if (((voiceConnection != null) && voiceConnection.joinConfig.channelId != channel.id) || !channel) {
             await interaction.reply({
                 content: "You can't stop me if you are not in a voice channel!",
                 flags: MessageFlagsBitField.Flags.Ephemeral
             })
-            return;
+            return
         }
 
         const audioPlayer = AudioPlayers.getInstance().getPlayer(interaction.guildId)
-        if (!audioPlayer || !audioPlayer.stop()) {
+        if ((audioPlayer == null) || !audioPlayer.stop()) {
             await interaction.reply({
-                content: "Nothing to stop! Try /play [url]",
+                content: 'Nothing to stop! Try /play [url]',
                 flags: MessageFlagsBitField.Flags.Ephemeral
             })
 
-            return;
+            return
         }
 
-        await interaction.reply("See you next time!");
+        await interaction.reply('See you next time!')
     }
-
 }

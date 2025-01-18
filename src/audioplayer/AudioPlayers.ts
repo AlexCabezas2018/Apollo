@@ -1,23 +1,23 @@
-import DiscordAudioPlayer from "./DiscordAudioPlayer";
+import DiscordAudioPlayer from './DiscordAudioPlayer'
 
 export default class AudioPlayers {
     static instance: AudioPlayers
-    private players: Map<string, DiscordAudioPlayer>;
+    private readonly players: Map<string, DiscordAudioPlayer>
 
     constructor() {
-        this.players = new Map();
+        this.players = new Map()
     }
 
     static getInstance() {
-        if (!this.instance) this.instance = new AudioPlayers();
-        return this.instance;
+        if (!this.instance) this.instance = new AudioPlayers()
+        return this.instance
     }
 
     getPlayer(guildId: string): DiscordAudioPlayer | undefined {
-        return this.players.get(guildId);
+        return this.players.get(guildId)
     }
 
     addPlayer(guildId: string, audioPlayer: DiscordAudioPlayer) {
-        this.players.set(guildId, audioPlayer);
+        this.players.set(guildId, audioPlayer)
     }
 }

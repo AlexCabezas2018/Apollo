@@ -1,6 +1,6 @@
-import ytdl from "@distube/ytdl-core"
-import {Readable} from "node:stream";
-import {Logger} from "../utils/Logger";
+import ytdl from '@distube/ytdl-core'
+import { Readable } from 'node:stream'
+import { Logger } from '../utils/Logger'
 
 export enum AudioProviderResponseStatus {
     SUCCESS = 0,
@@ -9,11 +9,10 @@ export enum AudioProviderResponseStatus {
 }
 
 export interface AudioProviderResponse {
-    status: AudioProviderResponseStatus;
-    name: string;
-    audioData: Readable | string;
+    status: AudioProviderResponseStatus
+    name: string
+    audioData: Readable | string
 }
-
 
 export const YoutubeAudioProvider = {
     async getAudio(url: string): Promise<AudioProviderResponse> {
@@ -21,25 +20,25 @@ export const YoutubeAudioProvider = {
             if (!ytdl.validateURL(url)) {
                 return {
                     status: AudioProviderResponseStatus.UNKNOWN_URL,
-                    name: "n/a",
-                    audioData: "n/a"
+                    name: 'n/a',
+                    audioData: 'n/a'
                 }
             }
 
-            const stream = ytdl(url, {filter: "audioonly"});
+            const stream = ytdl(url, { filter: 'audioonly' })
             const basicInfo = await ytdl.getInfo(url)
 
             return {
                 status: AudioProviderResponseStatus.SUCCESS,
                 name: basicInfo.videoDetails.title,
-                audioData: stream,
+                audioData: stream
             }
         } catch (error) {
-            Logger.error(error);
+            Logger.error(error)
             return {
                 status: AudioProviderResponseStatus.ERROR,
-                name: "n/a",
-                audioData: "n/a"
+                name: 'n/a',
+                audioData: 'n/a'
             }
         }
     }
