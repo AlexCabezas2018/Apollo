@@ -30,7 +30,7 @@ jobs:
         with:
           cache: 'npm'
       - run: npm ci
-      - run: tsfmt --verify
+      - run: npm run format-verify
 
   test:
     runs-on: ubuntu-latest
