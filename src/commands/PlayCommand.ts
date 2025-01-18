@@ -52,7 +52,7 @@ export default class PlayCommand extends Command {
             return
         }
 
-        voiceConnection = (voiceConnection != null) || joinVoiceChannel({
+        voiceConnection = voiceConnection || joinVoiceChannel({
             channelId: channel.id,
             guildId: interaction.guildId,
             adapterCreator: interaction.guild?.voiceAdapterCreator
