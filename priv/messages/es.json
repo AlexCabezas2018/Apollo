@@ -2,7 +2,6 @@
   "COMMAND_NOT_FOUND": "Comando no encontrado.",
   "UNEXPECTED_ERROR": "Error inesperado. Contacta con un administrador.",
   "USER_NOT_IN_VOICE_CHANNEL": "Debes estar en el mismo canal que yo para invocarme!",
-  "BOT_ALREADY_IN_USE": "Ya estoy invocado en otro canal de voz. Espera a tu turno!",
 
   "HELLO_COMMAND_SUCCESS_RESPONSE": "Hola mundo!",
 

@@ -1,8 +1,7 @@
 {
   "COMMAND_NOT_FOUND": "Command not found.",
   "UNEXPECTED_ERROR": "Unexpected error. Talk to a bot admin.",
-  "USER_NOT_IN_VOICE_CHANNEL": "You must be in a voice channel to invoke me!",
-  "BOT_ALREADY_IN_USE": "I'm already in another channel. Please wait until it's not used.",
+  "USER_NOT_IN_VOICE_CHANNEL": "You must be in the same voice channel as me to invoke me!",
 
   "HELLO_COMMAND_SUCCESS_RESPONSE": "Hello World!",
 
