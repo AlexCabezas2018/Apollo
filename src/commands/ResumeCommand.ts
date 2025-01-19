@@ -3,11 +3,12 @@ import { getVoiceConnection } from '@discordjs/voice'
 
 import Command from './Command'
 import AudioPlayers from '../audioplayer/AudioPlayers'
+import { Messages, MessageType } from "../utils/Messages";
 
 export default class ResumeCommand extends Command {
     async execute(client: Client, interaction: ChatInputCommandInteraction): Promise<void> {
         if ((interaction.guild == null) || interaction.guildId == null || (interaction.member == null)) {
-            await interaction.reply('Unexpected problem. Talk to a bot admin.')
+            await interaction.reply(Messages.get(MessageType.UNEXPECTED_ERROR))
             return
         }
 
@@ -18,7 +19,7 @@ export default class ResumeCommand extends Command {
 
         if (((voiceConnection != null) && voiceConnection.joinConfig.channelId != channel.id) || !channel) {
             await interaction.reply({
-                content: "You can't resume me if you are not in the same voice channel as me!",
+                content: Messages.get(MessageType.USER_NOT_IN_VOICE_CHANNEL),
                 flags: MessageFlagsBitField.Flags.Ephemeral
             })
             return;
@@ -27,13 +28,13 @@ export default class ResumeCommand extends Command {
         const audioPlayer = AudioPlayers.getInstance().getPlayer(interaction.guildId)
         if ((audioPlayer == null) || !audioPlayer.resume()) {
             await interaction.reply({
-                content: 'Nothing to resume! Try /play [url]',
+                content: Messages.get(MessageType.RESUME_COMMAND_NOTHING_TO_RESUME),
                 flags: MessageFlagsBitField.Flags.Ephemeral
             })
 
             return;
         }
 
-        await interaction.reply('Resumed!');
+        await interaction.reply(Messages.get(MessageType.RESUME_COMMAND_SUCCESS_RESPONSE));
     }
 }

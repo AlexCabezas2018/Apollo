@@ -1,6 +1,7 @@
 import { Client, Events, GatewayIntentBits } from 'discord.js'
 import { Config } from '../config'
 import { COMMANDS } from './commands/AvailableCommands'
+import { Messages, MessageType } from "./utils/Messages";
 
 export const Server = {
     start: async (): Promise<void> => {
@@ -11,7 +12,7 @@ export const Server = {
 
             const command = COMMANDS.get(interaction.commandName)
             if (command == null) {
-                await interaction.reply('Command not found.')
+                await interaction.reply(Messages.get(MessageType.COMMAND_NOT_FOUND))
                 return
             }
 
