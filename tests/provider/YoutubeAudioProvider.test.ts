@@ -1,15 +1,16 @@
-import { YoutubeAudioProvider, AudioProviderResponseStatus } from '../../src/provider/YoutubeAudioProvider'
+import YoutubeAudioProvider from '../../src/provider/YoutubeAudioProvider'
 import ytdl from '@distube/ytdl-core'
+import { AudioProviderResponseStatus } from "../../src/provider/AudioProvider";
 
-describe('getAudio(url)', () => {
+describe('get(url)', () => {
     const url = 'https://www.youtube.com/watch?v=Yw6u6YkTgQ4'
 
     test('should return error response on invalid url', async () => {
         ytdl.validateURL = jest.fn(() => false)
 
-        expect(await YoutubeAudioProvider.getAudio(url)).toStrictEqual({
+        expect(await new YoutubeAudioProvider().get(url)).toStrictEqual({
             status: AudioProviderResponseStatus.UNKNOWN_URL,
-            name: 'n/a',
+            title: 'n/a',
             audioData: 'n/a'
         })
     })
@@ -21,9 +22,9 @@ describe('getAudio(url)', () => {
 
         ytdl.validateURL = jest.fn(() => true)
 
-        expect(await YoutubeAudioProvider.getAudio(url)).toStrictEqual({
+        expect(await new YoutubeAudioProvider().get(url)).toStrictEqual({
             status: AudioProviderResponseStatus.ERROR,
-            name: 'n/a',
+            title: 'n/a',
             audioData: 'n/a'
         })
     })

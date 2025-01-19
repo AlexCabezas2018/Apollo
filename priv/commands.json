@@ -13,7 +13,7 @@
         {
           "name": "url",
           "type": 3,
-          "description": "A Youtube valid URL",
+          "description": "A Youtube or Soundcloud valid URL",
           "required": true
         }
       ]
