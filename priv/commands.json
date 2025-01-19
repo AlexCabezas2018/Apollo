@@ -27,6 +27,11 @@
       "name": "pause",
       "description": "It pauses the music",
       "type": 1
+    },
+    {
+      "name": "resume",
+      "description": "It unpauses a song, if there is something to unpause.",
+      "type": 1
     }
   ]
 }

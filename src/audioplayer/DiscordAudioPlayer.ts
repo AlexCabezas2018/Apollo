@@ -36,6 +36,12 @@ export default class DiscordAudioPlayer {
         return true;
     }
 
+    resume(): boolean {
+        if (this.audioPlayer.state.status != AudioPlayerStatus.Paused) return false;
+        this.audioPlayer.unpause();
+        return true;
+    }
+
     update(voiceConnection: VoiceConnection): void {
         this.voiceConnection = voiceConnection;
         this.audioPlayer = createAudioPlayer();
