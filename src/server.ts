@@ -19,7 +19,7 @@ export const Server = {
                 return
             }
 
-            command.execute(client, interaction)
+            await command.execute(client, interaction)
         })
 
         await client.login(Config.botToken)

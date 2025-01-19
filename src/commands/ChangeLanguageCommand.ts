@@ -1,40 +1,17 @@
-import { ChatInputCommandInteraction, Client, MessageFlagsBitField } from 'discord.js'
-import Command from './Command'
-import { getVoiceConnection } from '@discordjs/voice'
+import { ChatInputCommandInteraction, MessageFlagsBitField } from 'discord.js'
+import Command, { CommandInput } from './Command'
 import { Messages, MessageType } from "../utils/Messages";
 import { GuildPreferences, SupportedLanguages } from "../preferences/GuildPreferences";
 
 export default class ChangeLanguageCommand extends Command {
-    async execute(client: Client, interaction: ChatInputCommandInteraction): Promise<void> {
-        const preferences = GuildPreferences.getInstance().getPreferences(interaction.guildId)
+    async run(input: CommandInput): Promise<void> {
+        const { interaction, guildPreferences, interactionGuild } = input;
 
-        if ((interaction.guild == null) || interaction.guildId == null || (interaction.member == null)) {
-            await interaction.reply(Messages.get(preferences, MessageType.UNEXPECTED_ERROR))
-            return
-        }
-
-        // @ts-expect-error
-        const channel = interaction.member.voice.channel
-
-        const voiceConnection = getVoiceConnection(interaction.guildId)
-
-        if (((voiceConnection != null) && voiceConnection.joinConfig.channelId != channel.id) || !channel) {
-            await interaction.reply({
-                content: Messages.get(preferences, MessageType.USER_NOT_IN_VOICE_CHANNEL),
-                flags: MessageFlagsBitField.Flags.Ephemeral
-            })
-            return
-        }
-
-        const language = this.getSelectedLanguage(interaction);
-
-        const selectedPreferences = GuildPreferences.getInstance().getPreferences(interaction.guildId);
-        selectedPreferences.language = language;
-
-        GuildPreferences.getInstance().updatePreferences(interaction.guildId, preferences);
+        guildPreferences.language = this.getSelectedLanguage(interaction);
+        GuildPreferences.getInstance().updatePreferences(interactionGuild.id, guildPreferences);
 
         await interaction.reply({
-            content: Messages.get(selectedPreferences, MessageType.CHANGE_LANGUAGE_COMMAND_SUCCESS_RESPONSE),
+            content: Messages.get(guildPreferences, MessageType.CHANGE_LANGUAGE_COMMAND_SUCCESS_RESPONSE),
             flags: MessageFlagsBitField.Flags.Ephemeral
         });
     }
