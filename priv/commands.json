@@ -32,6 +32,29 @@
       "name": "resume",
       "description": "It unpauses a song, if there is something to unpause.",
       "type": 1
+    },
+    {
+      "name": "lang",
+      "description": "Change the language of the bot.",
+      "type": 1,
+      "options": [
+        {
+          "name": "language",
+          "type": 3,
+          "description": "Language to use from now on.",
+          "required": true,
+          "choices": [
+            {
+              "name": "English",
+              "value": "en"
+            },
+            {
+              "name": "Español",
+              "value": "es"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

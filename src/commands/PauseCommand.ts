@@ -3,11 +3,14 @@ import Command from './Command'
 import AudioPlayers from '../audioplayer/AudioPlayers'
 import { getVoiceConnection } from '@discordjs/voice'
 import { Messages, MessageType } from "../utils/Messages";
+import { GuildPreferences } from "../preferences/GuildPreferences";
 
 export default class PauseCommand extends Command {
     async execute(client: Client, interaction: CommandInteraction): Promise<void> {
+        const preferences = GuildPreferences.getInstance().getPreferences(interaction.guildId)
+
         if ((interaction.guild == null) || interaction.guildId == null || (interaction.member == null)) {
-            await interaction.reply(Messages.get(MessageType.UNEXPECTED_ERROR))
+            await interaction.reply(Messages.get(preferences, MessageType.UNEXPECTED_ERROR))
             return
         }
 
@@ -18,7 +21,7 @@ export default class PauseCommand extends Command {
 
         if (((voiceConnection != null) && voiceConnection.joinConfig.channelId != channel.id) || !channel) {
             await interaction.reply({
-                content: Messages.get(MessageType.USER_NOT_IN_VOICE_CHANNEL),
+                content: Messages.get(preferences, MessageType.USER_NOT_IN_VOICE_CHANNEL),
                 flags: MessageFlagsBitField.Flags.Ephemeral
             })
             return
@@ -27,13 +30,13 @@ export default class PauseCommand extends Command {
         const audioPlayer = AudioPlayers.getInstance().getPlayer(interaction.guildId)
         if ((audioPlayer == null) || !audioPlayer.pause()) {
             await interaction.reply({
-                content: Messages.get(MessageType.PAUSE_COMMAND_NOTHING_TO_PAUSE),
+                content: Messages.get(preferences, MessageType.PAUSE_COMMAND_NOTHING_TO_PAUSE),
                 flags: MessageFlagsBitField.Flags.Ephemeral
             })
 
             return
         }
 
-        await interaction.reply(Messages.get(MessageType.PAUSE_COMMAND_SUCCESS_RESPONSE));
+        await interaction.reply(Messages.get(preferences, MessageType.PAUSE_COMMAND_SUCCESS_RESPONSE));
     }
 }

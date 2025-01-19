@@ -6,11 +6,14 @@ import DiscordAudioPlayer from '../audioplayer/DiscordAudioPlayer'
 import AudioPlayers from '../audioplayer/AudioPlayers'
 import { AudioProviderResponseStatus, YoutubeAudioProvider } from '../provider/YoutubeAudioProvider'
 import { Messages, MessageType } from "../utils/Messages";
+import { GuildPreferences } from "../preferences/GuildPreferences";
 
 export default class PlayCommand extends Command {
     async execute(client: Client, interaction: ChatInputCommandInteraction): Promise<void> {
+        const preferences = GuildPreferences.getInstance().getPreferences(interaction.guildId)
+
         if ((interaction.guild == null) || interaction.guildId == null || (interaction.member == null)) {
-            await interaction.reply(Messages.get(MessageType.UNEXPECTED_ERROR))
+            await interaction.reply(Messages.get(preferences, MessageType.UNEXPECTED_ERROR))
             return
         }
 
@@ -19,7 +22,7 @@ export default class PlayCommand extends Command {
 
         if (!channel) {
             await interaction.reply({
-                content: Messages.get(MessageType.USER_NOT_IN_VOICE_CHANNEL),
+                content: Messages.get(preferences, MessageType.USER_NOT_IN_VOICE_CHANNEL),
                 flags: MessageFlagsBitField.Flags.Ephemeral
             })
             return
@@ -29,7 +32,7 @@ export default class PlayCommand extends Command {
 
         if ((voiceConnection != null) && voiceConnection.joinConfig.channelId != channel.id) {
             await interaction.reply({
-                content: Messages.get(MessageType.BOT_ALREADY_IN_USE),
+                content: Messages.get(preferences, MessageType.BOT_ALREADY_IN_USE),
                 flags: MessageFlagsBitField.Flags.Ephemeral
             })
             return
@@ -38,7 +41,7 @@ export default class PlayCommand extends Command {
         const url = this.getUrl(interaction)
         if (!url) {
             await interaction.reply({
-                content: Messages.get(MessageType.PLAY_COMMAND_URL_NOT_PROVIDED),
+                content: Messages.get(preferences, MessageType.PLAY_COMMAND_URL_NOT_PROVIDED),
                 flags: MessageFlagsBitField.Flags.Ephemeral
             })
             return
@@ -47,7 +50,7 @@ export default class PlayCommand extends Command {
         const audioProviderResponse = await YoutubeAudioProvider.getAudio(url)
         if (audioProviderResponse.status != AudioProviderResponseStatus.SUCCESS) {
             await interaction.reply({
-                content: Messages.get(MessageType.PLAY_COMMAND_RESOURCE_ERROR),
+                content: Messages.get(preferences, MessageType.PLAY_COMMAND_RESOURCE_ERROR),
                 flags: MessageFlagsBitField.Flags.Ephemeral
             })
             return
@@ -72,7 +75,7 @@ export default class PlayCommand extends Command {
             cachedAudioPlayer.play(audioResource)
         }
 
-        await interaction.reply(Messages.getAndReplace(MessageType.PLAY_COMMAND_SUCCESS_RESPONSE, audioProviderResponse.name))
+        await interaction.reply(Messages.getAndReplace(preferences, MessageType.PLAY_COMMAND_SUCCESS_RESPONSE, audioProviderResponse.name))
     }
 
     private getUrl(interaction: ChatInputCommandInteraction): string | undefined {

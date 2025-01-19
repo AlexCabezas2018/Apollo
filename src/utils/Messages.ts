@@ -1,4 +1,4 @@
-import messages from '../../priv/messages.json'
+import { Preferences } from "../preferences/GuildPreferences";
 
 export enum MessageType {
     COMMAND_NOT_FOUND = "COMMAND_NOT_FOUND",
@@ -14,16 +14,18 @@ export enum MessageType {
     PAUSE_COMMAND_NOTHING_TO_PAUSE = "PAUSE_COMMAND_NOTHING_TO_PAUSE",
     PAUSE_COMMAND_SUCCESS_RESPONSE = "PAUSE_COMMAND_SUCCESS_RESPONSE",
     RESUME_COMMAND_NOTHING_TO_RESUME = "RESUME_COMMAND_NOTHING_TO_RESUME",
-    RESUME_COMMAND_SUCCESS_RESPONSE = "RESUME_COMMAND_SUCCESS_RESPONSE"
+    RESUME_COMMAND_SUCCESS_RESPONSE = "RESUME_COMMAND_SUCCESS_RESPONSE",
+    CHANGE_LANGUAGE_COMMAND_SUCCESS_RESPONSE = "CHANGE_LANGUAGE_COMMAND_SUCCESS_RESPONSE"
 }
 
 export const Messages = {
-    get(messageType: MessageType): string {
+    get(preferences: Preferences, messageType: MessageType): string {
+        const messages = getMessages(preferences);
         return messages[messageType];
     },
 
-    getAndReplace(messageType: MessageType, ...variables: string[]): string {
-        const message = this.get(messageType);
+    getAndReplace(preferences: Preferences, messageType: MessageType, ...variables: string[]): string {
+        const message = this.get(preferences, messageType);
         const variablesIterator = variables.entries()
 
         return message.replace(/#\$#/g, () => {
@@ -31,4 +33,9 @@ export const Messages = {
             return String(value[1]);
         });
     }
+}
+
+const getMessages = (preferences: Preferences): any => {
+    const language = preferences.language;
+    return require(`../../priv/messages/${language}.json`);
 }
