@@ -1,0 +1,21 @@
+{
+  "COMMAND_NOT_FOUND": "Command not found.",
+  "UNEXPECTED_ERROR": "Unexpected error. Talk to a bot admin.",
+  "USER_NOT_IN_VOICE_CHANNEL": "You must be in a voice channel to invoke me!",
+  "BOT_ALREADY_IN_USE": "I'm already in another channel. Please wait until it's not used.",
+
+  "HELLO_COMMAND_SUCCESS_RESPONSE": "Hello World!",
+
+  "PLAY_COMMAND_URL_NOT_PROVIDED": "No url provided. Please try again.",
+  "PLAY_COMMAND_RESOURCE_ERROR": "Error while getting audio resource. Please try again.",
+  "PLAY_COMMAND_SUCCESS_RESPONSE": "Playing #$#!",
+
+  "STOP_COMMAND_NOTHING_TO_STOP": "Nothing to stop! Did you try to play something first?",
+  "STOP_COMMAND_SUCCESS_RESPONSE": "See you next time!",
+
+  "PAUSE_COMMAND_NOTHING_TO_PAUSE": "Nothing to pause! Did you try to play something first?",
+  "PAUSE_COMMAND_SUCCESS_RESPONSE": "Paused!",
+
+  "RESUME_COMMAND_NOTHING_TO_RESUME": "Nothing to resume! Did you try to play something first?",
+  "RESUME_COMMAND_SUCCESS_RESPONSE": "Resumed!"
+}
