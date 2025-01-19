@@ -1,12 +1,10 @@
 import { ChatInputCommandInteraction, Client, MessageFlagsBitField } from 'discord.js'
-import { getVoiceConnection } from '@discordjs/voice'
-
 import Command from './Command'
-import AudioPlayers from '../audioplayer/AudioPlayers'
+import { getVoiceConnection } from '@discordjs/voice'
 import { Messages, MessageType } from "../utils/Messages";
-import { GuildPreferences } from "../preferences/GuildPreferences";
+import { GuildPreferences, SupportedLanguages } from "../preferences/GuildPreferences";
 
-export default class ResumeCommand extends Command {
+export default class ChangeLanguageCommand extends Command {
     async execute(client: Client, interaction: ChatInputCommandInteraction): Promise<void> {
         const preferences = GuildPreferences.getInstance().getPreferences(interaction.guildId)
 
@@ -28,16 +26,18 @@ export default class ResumeCommand extends Command {
             return
         }
 
-        const audioPlayer = AudioPlayers.getInstance().getPlayer(interaction.guildId)
-        if ((audioPlayer == null) || !audioPlayer.resume()) {
-            await interaction.reply({
-                content: Messages.get(preferences, MessageType.RESUME_COMMAND_NOTHING_TO_RESUME),
-                flags: MessageFlagsBitField.Flags.Ephemeral
-            })
+        const language = this.getSelectedLanguage(interaction);
 
-            return;
-        }
+        const selectedPreferences = GuildPreferences.getInstance().getPreferences(interaction.guildId);
+        selectedPreferences.language = language;
 
-        await interaction.reply(Messages.get(preferences, MessageType.RESUME_COMMAND_SUCCESS_RESPONSE));
+        GuildPreferences.getInstance().updatePreferences(interaction.guildId, preferences);
+
+        await interaction.reply(Messages.get(selectedPreferences, MessageType.CHANGE_LANGUAGE_COMMAND_SUCCESS_RESPONSE));
+    }
+
+    private getSelectedLanguage(interaction: ChatInputCommandInteraction): SupportedLanguages {
+        const rawSelectedValue = String(interaction.options.data.find(option => option.name == 'language')?.value);
+        return rawSelectedValue as SupportedLanguages;
     }
 }

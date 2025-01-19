@@ -1,0 +1,23 @@
+{
+  "COMMAND_NOT_FOUND": "Comando no encontrado.",
+  "UNEXPECTED_ERROR": "Error inesperado. Contacta con un administrador.",
+  "USER_NOT_IN_VOICE_CHANNEL": "Debes estar en el mismo canal que yo para invocarme!",
+  "BOT_ALREADY_IN_USE": "Ya estoy invocado en otro canal de voz. Espera a tu turno!",
+
+  "HELLO_COMMAND_SUCCESS_RESPONSE": "Hola mundo!",
+
+  "PLAY_COMMAND_URL_NOT_PROVIDED": "URL no especificada. Intentalo de nuevo.",
+  "PLAY_COMMAND_RESOURCE_ERROR": "Error mientras se obtenia el recurso. Intentalo de nuevo.",
+  "PLAY_COMMAND_SUCCESS_RESPONSE": "Reproduciendo #$#!",
+
+  "STOP_COMMAND_NOTHING_TO_STOP": "No hay nada que parar, ¿Has probado a reproducir algo?",
+  "STOP_COMMAND_SUCCESS_RESPONSE": "Hasta la vista!",
+
+  "PAUSE_COMMAND_NOTHING_TO_PAUSE": "Nada que pausar, ¿Has probado a reproducir algo?",
+  "PAUSE_COMMAND_SUCCESS_RESPONSE": "Pausado!",
+
+  "RESUME_COMMAND_NOTHING_TO_RESUME": "Nada que reanudar, ¿Has probado a reproducir algo?",
+  "RESUME_COMMAND_SUCCESS_RESPONSE": "Reanudado!",
+
+  "CHANGE_LANGUAGE_COMMAND_SUCCESS_RESPONSE": "Genial! Hablaré en este idioma a partir de ahora!"
+}
