@@ -4,29 +4,31 @@ import { createAudioResource, joinVoiceChannel } from '@discordjs/voice'
 import Command, { CommandInput } from './Command'
 import DiscordAudioPlayer from '../audioplayer/DiscordAudioPlayer'
 import AudioPlayers from '../audioplayer/AudioPlayers'
-import { AudioProviderResponseStatus, YoutubeAudioProvider } from '../provider/YoutubeAudioProvider'
 import { Messages, MessageType } from "../utils/Messages";
+import { AudioProviderResponseStatus } from "../provider/AudioProvider";
+import { AudioProviderFactory } from "../provider/AudioProviderFactory";
 
 export default class PlayCommand extends Command {
     async run(input: CommandInput): Promise<void> {
         const { interaction, guildPreferences, channelId, voiceConnection, interactionGuild } = input
 
         const url = this.getUrl(interaction)
-        if (!url) {
+        const audioProvider = AudioProviderFactory.getProvider(url);
+        if (!audioProvider) {
             await interaction.reply({
-                content: Messages.get(guildPreferences, MessageType.PLAY_COMMAND_URL_NOT_PROVIDED),
+                content: Messages.get(guildPreferences, MessageType.PLAY_COMMAND_WRONG_URL),
                 flags: MessageFlagsBitField.Flags.Ephemeral
             })
-            return
+            return;
         }
 
-        const audioProviderResponse = await YoutubeAudioProvider.getAudio(url)
+        const audioProviderResponse = await audioProvider.get(url);
         if (audioProviderResponse.status != AudioProviderResponseStatus.SUCCESS) {
             await interaction.reply({
                 content: Messages.get(guildPreferences, MessageType.PLAY_COMMAND_RESOURCE_ERROR),
                 flags: MessageFlagsBitField.Flags.Ephemeral
             })
-            return
+            return;
         }
 
         const newVoiceConnection = voiceConnection || joinVoiceChannel({
@@ -51,15 +53,15 @@ export default class PlayCommand extends Command {
             Messages.getAndReplace(
                 guildPreferences,
                 MessageType.PLAY_COMMAND_SUCCESS_RESPONSE,
-                audioProviderResponse.name
+                audioProviderResponse.title
             )
         );
     }
 
-    private getUrl(interaction: CommandInteraction): string | undefined {
+    private getUrl(interaction: CommandInteraction): string {
         return String(
             interaction.options.data
                 .find(option => option.name == 'url')?.value
-        );
+        ) || "n/a";
     }
 }

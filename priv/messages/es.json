@@ -5,7 +5,7 @@
 
   "HELLO_COMMAND_SUCCESS_RESPONSE": "Hola mundo!",
 
-  "PLAY_COMMAND_URL_NOT_PROVIDED": "URL no especificada. Intentalo de nuevo.",
+  "PLAY_COMMAND_WRONG_URL": "No reconozco esta URL. ¿La has introducido correctamente?",
   "PLAY_COMMAND_RESOURCE_ERROR": "Error mientras se obtenia el recurso. Intentalo de nuevo.",
   "PLAY_COMMAND_SUCCESS_RESPONSE": "Reproduciendo #$#!",
 
