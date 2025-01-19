@@ -33,7 +33,10 @@ export default class ChangeLanguageCommand extends Command {
 
         GuildPreferences.getInstance().updatePreferences(interaction.guildId, preferences);
 
-        await interaction.reply(Messages.get(selectedPreferences, MessageType.CHANGE_LANGUAGE_COMMAND_SUCCESS_RESPONSE));
+        await interaction.reply({
+            content: Messages.get(selectedPreferences, MessageType.CHANGE_LANGUAGE_COMMAND_SUCCESS_RESPONSE),
+            flags: MessageFlagsBitField.Flags.Ephemeral
+        });
     }
 
     private getSelectedLanguage(interaction: ChatInputCommandInteraction): SupportedLanguages {
