@@ -4,7 +4,7 @@ import { Messages } from "../utils/Messages";
 import { MessageContent } from "./PubSub";
 import { GuildPreferences } from "../preferences/GuildPreferences";
 import { MessageFlagsBitField } from "discord.js";
-import {Logger} from "../utils/Logger";
+import { Logger } from "../utils/Logger";
 
 export default class PlayCommandListener extends Listener {
     setup(): void {
@@ -58,6 +58,6 @@ export default class PlayCommandListener extends Listener {
             });
         });
 
-        Logger.info("PlayCommand listener ON.");
+        Logger.debug("PlayCommand listener ON.");
     }
 }

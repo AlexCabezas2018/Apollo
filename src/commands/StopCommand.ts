@@ -1,6 +1,6 @@
-import Command, {CommandInput} from './Command'
+import Command, { CommandInput } from './Command'
 import AudioPlayers from '../audioplayer/AudioPlayers'
-import {MessageType} from '../utils/MessageTypes';
+import { MessageType } from '../utils/MessageTypes';
 import { Publisher } from '../events/PubSub';
 
 export default class StopCommand extends Command {
@@ -9,10 +9,10 @@ export default class StopCommand extends Command {
 
         const audioPlayer = AudioPlayers.getInstance().getPlayer(interactionGuild.id)
         if ((audioPlayer == null) || !audioPlayer.stop()) {
-            Publisher.publishEvent(MessageType.STOP_COMMAND_NOTHING_TO_STOP, {interaction})
+            Publisher.publishEvent(MessageType.STOP_COMMAND_NOTHING_TO_STOP, { interaction })
             return;
         }
 
-        Publisher.publishEvent(MessageType.STOP_COMMAND_SUCCESS_RESPONSE, {interaction});
+        Publisher.publishEvent(MessageType.STOP_COMMAND_SUCCESS_RESPONSE, { interaction });
     }
 }

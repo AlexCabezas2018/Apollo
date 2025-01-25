@@ -8,6 +8,9 @@ import PlayCommandListener from "./PlayCommandListener";
 import StopCommandListener from "./StopCommandListener";
 import ResumeCommandListener from "./ResumeCommandListener";
 import QueueCommandListener from "./QueueCommandListener";
+import PauseCommandListener from "./PauseCommandListener";
+import NextCommandListener from "./NextCommandListener";
+import ChangeLanguageCommandListener from "./ChangeLanguageCommandListener";
 
 const interactionResponseEmitter = new events.EventEmitter();
 
@@ -16,6 +19,9 @@ const LISTENERS: Listener[] = [
     new StopCommandListener(interactionResponseEmitter),
     new ResumeCommandListener(interactionResponseEmitter),
     new QueueCommandListener(interactionResponseEmitter),
+    new PauseCommandListener(interactionResponseEmitter),
+    new NextCommandListener(interactionResponseEmitter),
+    new ChangeLanguageCommandListener(interactionResponseEmitter)
 ];
 
 export interface MessageContent {

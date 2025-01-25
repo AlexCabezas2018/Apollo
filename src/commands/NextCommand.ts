@@ -1,28 +1,20 @@
-import { MessageFlagsBitField } from 'discord.js'
 import Command, { CommandInput } from './Command'
 import AudioPlayers from '../audioplayer/AudioPlayers'
-import { Messages } from "../utils/Messages";
 import { MessageType } from "../utils/MessageTypes";
+import { Publisher } from "../events/PubSub";
 
 export default class NextCommand extends Command {
     async run(input: CommandInput): Promise<void> {
-        const { interaction, interactionGuild, guildPreferences } = input;
+        const { interaction, interactionGuild } = input;
 
         const audioPlayer = AudioPlayers.getInstance().getPlayer(interactionGuild.id)
         if (!audioPlayer) {
-            await interaction.reply({
-                content: Messages.get(guildPreferences, MessageType.NEXT_COMMAND_NO_PLAYER),
-                flags: MessageFlagsBitField.Flags.Ephemeral
-            });
-
+            Publisher.publishEvent(MessageType.NEXT_COMMAND_NO_PLAYER, { interaction });
             return;
         }
 
         if (audioPlayer.queue.length == 0) {
-            await interaction.reply({
-                content: Messages.get(guildPreferences, MessageType.NEXT_COMMAND_NO_SONGS_IN_QUEUE),
-                flags: MessageFlagsBitField.Flags.Ephemeral
-            });
+            Publisher.publishEvent(MessageType.NEXT_COMMAND_NO_SONGS_IN_QUEUE, { interaction });
             audioPlayer.stop();
             return;
         }
