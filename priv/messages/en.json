@@ -20,5 +20,5 @@
   "CHANGE_LANGUAGE_COMMAND_SUCCESS_RESPONSE": "Nice! I will talk in this language now on!",
 
   "QUEUE_COMMAND_NO_QUEUE_RESPONSE": "There is no queue!",
-  "QUEUE_COMMAND_SUCCESS_RESPONSE": "Here is que queue: \n#$#"
+  "QUEUE_COMMAND_SUCCESS_RESPONSE": "Here is the queue: \n#$#"
 }
