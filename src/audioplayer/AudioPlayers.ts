@@ -20,4 +20,8 @@ export default class AudioPlayers {
     addPlayer(guildId: string, audioPlayer: DiscordAudioPlayer) {
         this.players.set(guildId, audioPlayer)
     }
+
+    removePlayer(guildId: string): void {
+        this.players.delete(guildId);
+    }
 }

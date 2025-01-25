@@ -25,7 +25,7 @@ export default abstract class Command {
 
         let voiceConnection = getVoiceConnection(interaction.guildId);
 
-        if (((voiceConnection != null) && voiceConnection.joinConfig.channelId != channel.id) || !channel) {
+        if (!channel || ((voiceConnection != null) && voiceConnection.joinConfig.channelId != channel.id)) {
             await interaction.reply({
                 content: Messages.get(preferences, MessageType.USER_NOT_IN_VOICE_CHANNEL),
                 flags: MessageFlagsBitField.Flags.Ephemeral

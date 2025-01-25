@@ -6,12 +6,12 @@ export enum AudioProviderResponseStatus {
     UNKNOWN_URL = 2
 }
 
-export interface AudioProviderResponse {
+export interface AudioData {
     status: AudioProviderResponseStatus
     title: string
-    audioData: Readable | string
+    audioResource: Readable | string
 }
 
 export default interface AudioProvider {
-    get(url: string): Promise<AudioProviderResponse>
+    get(url: string): Promise<AudioData>
 }

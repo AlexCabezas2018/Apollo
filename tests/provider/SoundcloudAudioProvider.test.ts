@@ -13,7 +13,7 @@ describe('get(url)', () => {
         expect(await new SoundcloudAudioProvider().get(url)).toStrictEqual({
             status: AudioProviderResponseStatus.ERROR,
             title: 'n/a',
-            audioData: 'n/a'
+            audioResource: 'n/a'
         })
     })
 })
