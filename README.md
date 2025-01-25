@@ -77,12 +77,18 @@ Here are other util commands that can be invoked via `npm`:
 <img src="docs/gifs/stop.gif" width="400">
 
 3. `/pause`: It pauses the music.
+<img src="docs/gifs/pause.gif" width="400">
 
 4. `/resume`: Resumes previous paused content.
+<img src="docs/gifs/resume.gif" width="400">
 
-5. `/lang [language]`: It changes the language of the bot (check [How to add a new language](/priv/howto/how-to-add-a-new-language.md))
+5. `/queue`: Displays the information of que queue.
+<img src="docs/gifs/queue.gif" width="400">
 
-### **Do you want to add new commands? Check [this](priv/howto/how-to-add-a-new-command.md)**
+6. `/lang [language]`: It changes the language of the bot (check [How to add a new language](/docs/howto/how-to-add-a-new-language.md))
+<img src="docs/gifs/lang.gif" width="400">
+
+### **Do you want to add new commands? Check [this](docs/howto/how-to-add-a-new-command.md)**
 ## Contribution 🫶
 Want to improve this? Great news! I'm open to any change that can improve this, but I have some rules:
 1. Of course, you can fork it, but if you think that you have an idea, and you want to contribute here, just open an issue,
