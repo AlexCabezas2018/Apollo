@@ -11,7 +11,7 @@ describe('get(url)', () => {
         expect(await new YoutubeAudioProvider().get(url)).toStrictEqual({
             status: AudioProviderResponseStatus.UNKNOWN_URL,
             title: 'n/a',
-            audioData: 'n/a'
+            audioResource: 'n/a'
         })
     })
 
@@ -25,7 +25,7 @@ describe('get(url)', () => {
         expect(await new YoutubeAudioProvider().get(url)).toStrictEqual({
             status: AudioProviderResponseStatus.ERROR,
             title: 'n/a',
-            audioData: 'n/a'
+            audioResource: 'n/a'
         })
     })
 })
