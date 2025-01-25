@@ -45,9 +45,11 @@ You can check a bot that is currently using this backend! [Here](https://discord
 
 If you followed correctly the procedure, you must have somewhere stored an `APP_ID`, `BOT_TOKEN` and `PUBLIC_KEY` variables.
 I don't think I have to tell you, but those are sensitive data, so I don't recommend sharing this anywhere, otherwise your
-bot security could be compromised.
+bot security could be compromised.  
+
 2. In this project, there is a file called [`.env.example`](.env.example). To run it in local, you will need to rename the file to just
 `.env` and replace the placeholder with the values that you got (This information will be shared just with Discord API, so no security leaks here).
+
 3. You will have to register the commands that are available in the [`commands.json`](priv/commands.json) file. For that, you will need to run:
 ```
 npm run register
