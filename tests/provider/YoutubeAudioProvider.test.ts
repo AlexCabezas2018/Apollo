@@ -1,6 +1,7 @@
 import YoutubeAudioProvider from '../../src/provider/YoutubeAudioProvider'
 import ytdl from '@distube/ytdl-core'
-import { AudioProviderResponseStatus } from "../../src/provider/AudioProvider";
+import { AudioProviderResponseStatus } from "../../src/provider/AudioData";
+
 
 describe('get(url)', () => {
     const url = 'https://www.youtube.com/watch?v=Yw6u6YkTgQ4'

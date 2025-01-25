@@ -13,7 +13,7 @@ export default class NextCommand extends Command {
             return;
         }
 
-        if (audioPlayer.queue.length == 0) {
+        if (audioPlayer.songs.isEmpty()) {
             Publisher.publishEvent(MessageType.NEXT_COMMAND_NO_SONGS_IN_QUEUE, { interaction });
             audioPlayer.stop();
             return;

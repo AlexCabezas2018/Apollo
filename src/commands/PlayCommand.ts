@@ -4,10 +4,10 @@ import { joinVoiceChannel } from '@discordjs/voice'
 import Command, { CommandInput } from './Command'
 import DiscordAudioPlayer from '../audioplayer/DiscordAudioPlayer'
 import AudioPlayers from '../audioplayer/AudioPlayers'
-import { AudioProviderResponseStatus } from "../provider/AudioProvider";
 import { AudioProviderFactory } from "../provider/AudioProviderFactory";
 import { Publisher } from "../events/PubSub";
 import { MessageType } from '../utils/MessageTypes'
+import { AudioProviderResponseStatus } from "../provider/AudioData";
 
 export default class PlayCommand extends Command {
     async run(input: CommandInput): Promise<void> {

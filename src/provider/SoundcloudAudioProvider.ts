@@ -1,6 +1,7 @@
-import AudioProvider, { AudioData, AudioProviderResponseStatus } from "./AudioProvider";
+import AudioProvider from "./AudioProvider";
 import scdl from "soundcloud-downloader";
 import { Logger } from "../utils/Logger";
+import { AudioProviderResponseStatus, AudioData } from "./AudioData";
 
 export default class SoundcloudAudioProvider implements AudioProvider {
     async get(url: string): Promise<AudioData> {
