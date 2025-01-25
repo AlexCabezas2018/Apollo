@@ -3,8 +3,6 @@
   "UNEXPECTED_ERROR": "Error inesperado. Contacta con un administrador.",
   "USER_NOT_IN_VOICE_CHANNEL": "¡Debes estar en el mismo canal que yo para invocarme!",
 
-  "HELLO_COMMAND_SUCCESS_RESPONSE": "¡Hola mundo!",
-
   "PLAY_COMMAND_WRONG_URL": "No reconozco esta URL. ¿La has introducido correctamente?",
   "PLAY_COMMAND_RESOURCE_ERROR": "Error mientras se obtenia el recurso. Intentalo de nuevo.",
   "PLAY_COMMAND_SUCCESS_RESPONSE": "¡Reproduciendo #$#!",
