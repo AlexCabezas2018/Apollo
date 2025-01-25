@@ -1,7 +1,8 @@
 import { ChatInputCommandInteraction, Client, Guild, MessageFlagsBitField } from 'discord.js'
 import { GuildPreferences, Preferences } from "../preferences/GuildPreferences";
-import { Messages, MessageType } from "../utils/Messages";
+import { Messages } from "../utils/Messages";
 import { getVoiceConnection, VoiceConnection } from "@discordjs/voice";
+import { MessageType } from "../utils/MessageTypes";
 
 export interface CommandInput {
     interaction: ChatInputCommandInteraction;

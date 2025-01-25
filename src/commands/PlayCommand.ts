@@ -1,33 +1,28 @@
-import { CommandInteraction, MessageFlagsBitField } from 'discord.js'
+import { CommandInteraction } from 'discord.js'
 import { joinVoiceChannel } from '@discordjs/voice'
 
 import Command, { CommandInput } from './Command'
 import DiscordAudioPlayer from '../audioplayer/DiscordAudioPlayer'
 import AudioPlayers from '../audioplayer/AudioPlayers'
-import { Messages, MessageType } from "../utils/Messages";
 import { AudioProviderResponseStatus } from "../provider/AudioProvider";
 import { AudioProviderFactory } from "../provider/AudioProviderFactory";
+import { Publisher } from "../events/PubSub";
+import { MessageType } from '../utils/MessageTypes'
 
 export default class PlayCommand extends Command {
     async run(input: CommandInput): Promise<void> {
-        const { interaction, guildPreferences, channelId, interactionGuild } = input
+        const { interaction, channelId, interactionGuild } = input
 
         const url = this.getUrl(interaction)
         const audioProvider = AudioProviderFactory.getProvider(url);
         if (!audioProvider) {
-            await interaction.reply({
-                content: Messages.get(guildPreferences, MessageType.PLAY_COMMAND_WRONG_URL),
-                flags: MessageFlagsBitField.Flags.Ephemeral
-            })
+            Publisher.publishEvent(MessageType.PLAY_COMMAND_WRONG_URL, { interaction });
             return;
         }
 
         const audioProviderResponse = await audioProvider.get(url);
         if (audioProviderResponse.status != AudioProviderResponseStatus.SUCCESS) {
-            await interaction.reply({
-                content: Messages.get(guildPreferences, MessageType.PLAY_COMMAND_RESOURCE_ERROR),
-                flags: MessageFlagsBitField.Flags.Ephemeral
-            })
+            Publisher.publishEvent(MessageType.PLAY_COMMAND_RESOURCE_ERROR, { interaction });
             return;
         }
 
@@ -40,19 +35,15 @@ export default class PlayCommand extends Command {
                 adapterCreator: interactionGuild.voiceAdapterCreator
             });
 
-            const audioPlayer = new DiscordAudioPlayer(interaction, voiceConnection, guildPreferences);
+            const audioPlayer = new DiscordAudioPlayer(interaction, voiceConnection);
             audioPlayer.addToQueue(audioProviderResponse);
             AudioPlayers.getInstance().addPlayer(interactionGuild.id, audioPlayer);
             await audioPlayer.play();
         } else {
             cachedAudioPlayer.addToQueue(audioProviderResponse);
-            await interaction.reply(
-                Messages.getAndReplace(
-                    guildPreferences,
-                    MessageType.PLAY_COMMAND_ADDED_TO_QUEUE_SUCCESS,
-                    audioProviderResponse.title
-                )
-            );
+            Publisher.publishEvent(MessageType.PLAY_COMMAND_ADDED_TO_QUEUE_SUCCESS, {
+                interaction, metaData: audioProviderResponse
+            });
         }
     }
 

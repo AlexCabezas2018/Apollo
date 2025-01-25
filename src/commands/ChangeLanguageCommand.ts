@@ -1,7 +1,8 @@
-import { ChatInputCommandInteraction, MessageFlagsBitField } from 'discord.js'
+import { ChatInputCommandInteraction } from 'discord.js'
 import Command, { CommandInput } from './Command'
-import { Messages, MessageType } from "../utils/Messages";
 import { GuildPreferences, SupportedLanguages } from "../preferences/GuildPreferences";
+import { MessageType } from '../utils/MessageTypes';
+import { Publisher } from "../events/PubSub";
 
 export default class ChangeLanguageCommand extends Command {
     async run(input: CommandInput): Promise<void> {
@@ -10,10 +11,7 @@ export default class ChangeLanguageCommand extends Command {
         guildPreferences.language = this.getSelectedLanguage(interaction);
         GuildPreferences.getInstance().updatePreferences(interactionGuild.id, guildPreferences);
 
-        await interaction.reply({
-            content: Messages.get(guildPreferences, MessageType.CHANGE_LANGUAGE_COMMAND_SUCCESS_RESPONSE),
-            flags: MessageFlagsBitField.Flags.Ephemeral
-        });
+        Publisher.publishEvent(MessageType.CHANGE_LANGUAGE_COMMAND_SUCCESS_RESPONSE, { interaction });
     }
 
     private getSelectedLanguage(interaction: ChatInputCommandInteraction): SupportedLanguages {
