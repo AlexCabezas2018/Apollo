@@ -1,17 +1,21 @@
 import events from 'events'
-import PlayCommandListener from "./PlayCommandListener";
-import { MessageType } from "../utils/MessageTypes";
 import { ChatInputCommandInteraction } from "discord.js";
-import StopCommandListener from "./StopCommandListener";
+
 import Listener from "./Listener";
+import { MessageType } from "../utils/MessageTypes";
+
+import PlayCommandListener from "./PlayCommandListener";
+import StopCommandListener from "./StopCommandListener";
 import ResumeCommandListener from "./ResumeCommandListener";
+import QueueCommandListener from "./QueueCommandListener";
 
 const interactionResponseEmitter = new events.EventEmitter();
 
 const LISTENERS: Listener[] = [
     new PlayCommandListener(interactionResponseEmitter),
     new StopCommandListener(interactionResponseEmitter),
-    new ResumeCommandListener(interactionResponseEmitter)
+    new ResumeCommandListener(interactionResponseEmitter),
+    new QueueCommandListener(interactionResponseEmitter),
 ];
 
 export interface MessageContent {

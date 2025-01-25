@@ -1,45 +1,25 @@
 import Command, { CommandInput } from './Command'
 import AudioPlayers from '../audioplayer/AudioPlayers'
 import { AudioData } from "../provider/AudioProvider";
-import { Messages } from "../utils/Messages";
-import { MessageFlagsBitField } from "discord.js";
 import { MessageType } from "../utils/MessageTypes";
+import {Publisher} from "../events/PubSub";
 
 export default class QueueCommand extends Command {
     async run(input: CommandInput): Promise<void> {
-        const { interactionGuild, interaction, guildPreferences } = input;
+        const { interactionGuild, interaction } = input;
         const player = AudioPlayers.getInstance().getPlayer(interactionGuild.id);
         if (!player) {
-            await interaction.reply({
-                content: Messages.get(
-                    guildPreferences,
-                    MessageType.QUEUE_COMMAND_NO_QUEUE_RESPONSE
-                ),
-                flags: MessageFlagsBitField.Flags.Ephemeral
-            });
+            Publisher.publishEvent(MessageType.QUEUE_COMMAND_NO_QUEUE_RESPONSE, {interaction});
             return;
         }
 
         const queueList = this.queueToString(player.queue);
         if (!queueList) {
-            await interaction.reply({
-                content: Messages.get(
-                    guildPreferences,
-                    MessageType.QUEUE_COMMAND_NO_QUEUE_RESPONSE
-                ),
-                flags: MessageFlagsBitField.Flags.Ephemeral
-            });
+            Publisher.publishEvent(MessageType.QUEUE_COMMAND_NO_QUEUE_RESPONSE, {interaction});
             return;
         }
 
-        await interaction.reply({
-            content: Messages.getAndReplace(
-                guildPreferences,
-                MessageType.QUEUE_COMMAND_SUCCESS_RESPONSE,
-                queueList
-            ),
-            flags: MessageFlagsBitField.Flags.Ephemeral
-        });
+        Publisher.publishEvent(MessageType.QUEUE_COMMAND_SUCCESS_RESPONSE, {interaction, metaData: queueList});
     }
 
     private queueToString(queue: AudioData[]): string | undefined {
