@@ -19,5 +19,8 @@
   "RESUME_COMMAND_NOTHING_TO_RESUME": "Nothing to resume! Did you try to play something first?",
   "RESUME_COMMAND_SUCCESS_RESPONSE": "Resumed!",
 
-  "CHANGE_LANGUAGE_COMMAND_SUCCESS_RESPONSE": "Nice! I will talk in this language now on!"
+  "CHANGE_LANGUAGE_COMMAND_SUCCESS_RESPONSE": "Nice! I will talk in this language now on!",
+
+  "QUEUE_COMMAND_NO_QUEUE_RESPONSE": "There is no queue!",
+  "QUEUE_COMMAND_SUCCESS_RESPONSE": "Here is que queue: \n#$#"
 }

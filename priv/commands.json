@@ -1,11 +1,6 @@
 {
   "commands": [
     {
-      "name": "hello",
-      "description": "It just a test command",
-      "type": 1
-    },
-    {
       "name": "play",
       "description": "Plays a song",
       "type": 1,
@@ -55,6 +50,11 @@
           ]
         }
       ]
+    },
+    {
+      "name": "queue",
+      "description": "Returns the songs that are in que queue",
+      "type": 1
     }
   ]
 }

@@ -5,6 +5,7 @@ import StopCommand from './StopCommand'
 import PauseCommand from "./PauseCommand";
 import ResumeCommand from "./ResumeCommand";
 import ChangeLanguageCommand from "./ChangeLanguageCommand";
+import QueueCommand from "./QueueCommand";
 
 export const COMMANDS = new Map<string, Command>([
     ['hello', new HelloCommand()],
@@ -12,5 +13,6 @@ export const COMMANDS = new Map<string, Command>([
     ['stop', new StopCommand()],
     ['pause', new PauseCommand()],
     ['resume', new ResumeCommand()],
-    ['lang', new ChangeLanguageCommand()]
+    ['lang', new ChangeLanguageCommand()],
+    ['queue', new QueueCommand()],
 ])
