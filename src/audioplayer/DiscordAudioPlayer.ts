@@ -34,7 +34,7 @@ export default class DiscordAudioPlayer {
         return this.songsQueue;
     }
 
-    async play(): Promise<void> {
+    async play(interaction: ChatInputCommandInteraction = this.interaction): Promise<void> {
         const audioData = this.songsQueue.shift();
         const audioResource = createAudioResource(audioData.audioResource)
         this.audioPlayer.play(audioResource);
@@ -44,10 +44,10 @@ export default class DiscordAudioPlayer {
             audioData.title
         );
 
-        if (this.interaction.replied) {
-            await this.interaction.followUp(message)
+        if (interaction.replied) {
+            await interaction.followUp(message)
         } else {
-            await this.interaction.reply(message);
+            await interaction.reply(message);
         }
     }
 

@@ -20,5 +20,8 @@
   "CHANGE_LANGUAGE_COMMAND_SUCCESS_RESPONSE": "Nice! I will talk in this language now on!",
 
   "QUEUE_COMMAND_NO_QUEUE_RESPONSE": "There is no queue!",
-  "QUEUE_COMMAND_SUCCESS_RESPONSE": "Here is the queue: \n#$#"
+  "QUEUE_COMMAND_SUCCESS_RESPONSE": "Here is the queue: \n#$#",
+
+  "NEXT_COMMAND_NO_PLAYER": "There is no active player. Try /play [url]",
+  "NEXT_COMMAND_NO_SONGS_IN_QUEUE": "Queue is empty. Exiting. Bye!"
 }
