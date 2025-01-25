@@ -8,6 +8,7 @@
   "PLAY_COMMAND_WRONG_URL": "No reconozco esta URL. ¿La has introducido correctamente?",
   "PLAY_COMMAND_RESOURCE_ERROR": "Error mientras se obtenia el recurso. Intentalo de nuevo.",
   "PLAY_COMMAND_SUCCESS_RESPONSE": "Reproduciendo #$#!",
+  "PLAY_COMMAND_ADDED_TO_QUEUE_SUCCESS": "Añadido #$# a la cola!",
 
   "STOP_COMMAND_NOTHING_TO_STOP": "No hay nada que parar, ¿Has probado a reproducir algo?",
   "STOP_COMMAND_SUCCESS_RESPONSE": "Hasta la vista!",

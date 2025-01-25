@@ -1,15 +1,15 @@
 import ytdl from '@distube/ytdl-core'
 import { Logger } from '../utils/Logger'
-import AudioProvider, { AudioProviderResponse, AudioProviderResponseStatus } from "./AudioProvider";
+import AudioProvider, { AudioData, AudioProviderResponseStatus } from "./AudioProvider";
 
 export default class YoutubeAudioProvider implements AudioProvider {
-    async get(url: string): Promise<AudioProviderResponse> {
+    async get(url: string): Promise<AudioData> {
         try {
             if (!ytdl.validateURL(url)) {
                 return {
                     status: AudioProviderResponseStatus.UNKNOWN_URL,
                     title: 'n/a',
-                    audioData: 'n/a'
+                    audioResource: 'n/a'
                 }
             }
 
@@ -19,14 +19,14 @@ export default class YoutubeAudioProvider implements AudioProvider {
             return {
                 status: AudioProviderResponseStatus.SUCCESS,
                 title: basicInfo.videoDetails.title,
-                audioData: stream
+                audioResource: stream
             }
         } catch (error) {
             Logger.error(error)
             return {
                 status: AudioProviderResponseStatus.ERROR,
                 title: 'n/a',
-                audioData: 'n/a'
+                audioResource: 'n/a'
             }
         }
     }

@@ -1,5 +1,5 @@
 import { CommandInteraction, MessageFlagsBitField } from 'discord.js'
-import { createAudioResource, joinVoiceChannel } from '@discordjs/voice'
+import { joinVoiceChannel } from '@discordjs/voice'
 
 import Command, { CommandInput } from './Command'
 import DiscordAudioPlayer from '../audioplayer/DiscordAudioPlayer'
@@ -10,7 +10,7 @@ import { AudioProviderFactory } from "../provider/AudioProviderFactory";
 
 export default class PlayCommand extends Command {
     async run(input: CommandInput): Promise<void> {
-        const { interaction, guildPreferences, channelId, voiceConnection, interactionGuild } = input
+        const { interaction, guildPreferences, channelId, interactionGuild } = input
 
         const url = this.getUrl(interaction)
         const audioProvider = AudioProviderFactory.getProvider(url);
@@ -31,31 +31,29 @@ export default class PlayCommand extends Command {
             return;
         }
 
-        const newVoiceConnection = voiceConnection || joinVoiceChannel({
-            channelId: channelId,
-            guildId: interactionGuild.id,
-            adapterCreator: interactionGuild.voiceAdapterCreator
-        })
-
-        const audioResource = createAudioResource(audioProviderResponse.audioData)
-        const cachedAudioPlayer = AudioPlayers.getInstance().getPlayer(interactionGuild.id)
+        const cachedAudioPlayer = AudioPlayers.getInstance().getPlayer(interactionGuild.id);
 
         if (cachedAudioPlayer == null) {
-            const audioPlayer = new DiscordAudioPlayer(newVoiceConnection)
-            AudioPlayers.getInstance().addPlayer(interactionGuild.id, audioPlayer)
-            audioPlayer.play(audioResource)
-        } else {
-            cachedAudioPlayer.update(newVoiceConnection)
-            cachedAudioPlayer.play(audioResource)
-        }
+            const voiceConnection = joinVoiceChannel({
+                channelId: channelId,
+                guildId: interactionGuild.id,
+                adapterCreator: interactionGuild.voiceAdapterCreator
+            });
 
-        await interaction.reply(
-            Messages.getAndReplace(
-                guildPreferences,
-                MessageType.PLAY_COMMAND_SUCCESS_RESPONSE,
-                audioProviderResponse.title
-            )
-        );
+            const audioPlayer = new DiscordAudioPlayer(interaction, voiceConnection, guildPreferences);
+            audioPlayer.addToQueue(audioProviderResponse);
+            AudioPlayers.getInstance().addPlayer(interactionGuild.id, audioPlayer);
+            await audioPlayer.play();
+        } else {
+            cachedAudioPlayer.addToQueue(audioProviderResponse);
+            await interaction.reply(
+                Messages.getAndReplace(
+                    guildPreferences,
+                    MessageType.PLAY_COMMAND_ADDED_TO_QUEUE_SUCCESS,
+                    audioProviderResponse.title
+                )
+            );
+        }
     }
 
     private getUrl(interaction: CommandInteraction): string {
