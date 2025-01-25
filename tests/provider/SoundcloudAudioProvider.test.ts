@@ -1,6 +1,6 @@
 import scdl from "soundcloud-downloader";
-import { AudioProviderResponseStatus } from "../../src/provider/AudioProvider";
 import SoundcloudAudioProvider from "../../src/provider/SoundcloudAudioProvider";
+import { AudioProviderResponseStatus } from "../../src/provider/AudioData";
 
 describe('get(url)', () => {
     const url = 'https://soundcloud.com/droserose/lets-meet'
