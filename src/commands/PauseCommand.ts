@@ -1,7 +1,8 @@
 import { MessageFlagsBitField } from 'discord.js'
 import Command, { CommandInput } from './Command'
 import AudioPlayers from '../audioplayer/AudioPlayers'
-import { Messages, MessageType } from "../utils/Messages";
+import { Messages } from "../utils/Messages";
+import { MessageType } from "../utils/MessageTypes";
 
 export default class PauseCommand extends Command {
     async run(input: CommandInput): Promise<void> {

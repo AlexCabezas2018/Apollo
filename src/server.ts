@@ -1,8 +1,9 @@
 import { Client, Events, GatewayIntentBits } from 'discord.js'
 import { Config } from '../config'
 import { COMMANDS } from './commands/AvailableCommands'
-import { Messages, MessageType } from "./utils/Messages";
+import { Messages } from "./utils/Messages";
 import { GuildPreferences } from "./preferences/GuildPreferences";
+import { MessageType } from "./utils/MessageTypes";
 
 export const Server = {
     start: async (): Promise<void> => {

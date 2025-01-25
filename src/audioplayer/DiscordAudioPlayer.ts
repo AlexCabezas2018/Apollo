@@ -9,23 +9,21 @@ import { Logger } from '../utils/Logger'
 import { AudioData } from "../provider/AudioProvider";
 import AudioPlayers from "./AudioPlayers";
 import { ChatInputCommandInteraction } from 'discord.js';
-import { Messages, MessageType } from "../utils/Messages";
-import { Preferences } from "../preferences/GuildPreferences";
+import { MessageType } from "../utils/MessageTypes";
+import { Publisher } from "../events/PubSub";
 
 export default class DiscordAudioPlayer {
     private voiceConnection: VoiceConnection;
     private readonly audioPlayer: AudioPlayer;
     private songsQueue: AudioData[];
     private interaction: ChatInputCommandInteraction;
-    private readonly preferences: Preferences;
 
 
-    constructor(interaction: ChatInputCommandInteraction, voiceConnection: VoiceConnection, preferences: Preferences) {
+    constructor(interaction: ChatInputCommandInteraction, voiceConnection: VoiceConnection) {
         this.voiceConnection = voiceConnection;
         this.audioPlayer = createAudioPlayer();
         this.interaction = interaction;
         this.songsQueue = [];
-        this.preferences = preferences;
 
         this.setup();
     }
@@ -38,17 +36,10 @@ export default class DiscordAudioPlayer {
         const audioData = this.songsQueue.shift();
         const audioResource = createAudioResource(audioData.audioResource)
         this.audioPlayer.play(audioResource);
-        const message = Messages.getAndReplace(
-            this.preferences,
-            MessageType.PLAY_COMMAND_SUCCESS_RESPONSE,
-            audioData.title
-        );
 
-        if (interaction.replied) {
-            await interaction.followUp(message)
-        } else {
-            await interaction.reply(message);
-        }
+        Publisher.publishEvent(MessageType.PLAY_COMMAND_SUCCESS_RESPONSE, {
+            interaction, metaData: audioData
+        });
     }
 
     addToQueue(audioData: AudioData): void {

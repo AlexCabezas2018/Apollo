@@ -1,7 +1,8 @@
 import { ChatInputCommandInteraction, MessageFlagsBitField } from 'discord.js'
 import Command, { CommandInput } from './Command'
-import { Messages, MessageType } from "../utils/Messages";
+import { Messages } from "../utils/Messages";
 import { GuildPreferences, SupportedLanguages } from "../preferences/GuildPreferences";
+import { MessageType } from '../utils/MessageTypes';
 
 export default class ChangeLanguageCommand extends Command {
     async run(input: CommandInput): Promise<void> {
