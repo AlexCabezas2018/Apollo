@@ -14,7 +14,6 @@ export const Server = {
 
             const command = COMMANDS.get(interaction.commandName)
             if (command == null) {
-
                 await interaction.reply(Messages.get(preferences, MessageType.COMMAND_NOT_FOUND))
                 return
             }

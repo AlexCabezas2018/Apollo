@@ -55,6 +55,11 @@
       "name": "queue",
       "description": "Returns the songs that are in que queue",
       "type": 1
+    },
+    {
+      "name": "next",
+      "description": "Plays the next song in the queue. Exits if no more music to play.",
+      "type": 1
     }
   ]
 }

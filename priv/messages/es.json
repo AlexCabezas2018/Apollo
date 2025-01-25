@@ -20,5 +20,8 @@
   "CHANGE_LANGUAGE_COMMAND_SUCCESS_RESPONSE": "¡Genial! ¡Hablaré en este idioma a partir de ahora!",
 
   "QUEUE_COMMAND_NO_QUEUE_RESPONSE": "¡No hay cola de reproducción!",
-  "QUEUE_COMMAND_SUCCESS_RESPONSE": "Ahora mismo la cola pinta así: \n#$#"
+  "QUEUE_COMMAND_SUCCESS_RESPONSE": "Ahora mismo la cola pinta así: \n#$#",
+
+  "NEXT_COMMAND_NO_PLAYER": "No hay sesión activa en este momento. Prueba /play [url]",
+  "NEXT_COMMAND_NO_SONGS_IN_QUEUE": "La cola está vacía. Saliendo. Hasta la próxima!"
 }
