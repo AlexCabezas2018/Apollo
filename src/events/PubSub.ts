@@ -2,11 +2,14 @@ import events from 'events'
 import PlayCommandListener from "./PlayCommandListener";
 import { MessageType } from "../utils/MessageTypes";
 import { ChatInputCommandInteraction } from "discord.js";
+import StopCommandListener from "./StopCommandListener";
+import Listener from "./Listener";
 
-const eventEmitter = new events.EventEmitter();
+const interactionResponseEmitter = new events.EventEmitter();
 
-const LISTENERS = [
-    new PlayCommandListener(eventEmitter)
+const LISTENERS: Listener[] = [
+    new PlayCommandListener(interactionResponseEmitter),
+    new StopCommandListener(interactionResponseEmitter)
 ];
 
 export interface MessageContent {
@@ -23,6 +26,6 @@ export const PubSub = {
 
 export const Publisher = {
     publishEvent: (messageType: MessageType, content: MessageContent) => {
-        eventEmitter.emit(messageType, content);
+        interactionResponseEmitter.emit(messageType, content);
     }
 }
