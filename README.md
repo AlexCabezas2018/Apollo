@@ -76,7 +76,13 @@ Here are other util commands that can be invoked via `npm`:
 2. `/stop`: It stops the music.
 <img src="docs/gifs/stop.gif" width="400">
 
+3. `/pause`: It pauses the music.
 
+4. `/resume`: Resumes previous paused content.
+
+5. `/lang [language]`: It changes the language of the bot (check [How to add a new language](/priv/howto/how-to-add-a-new-language.md))
+
+### **Do you want to add new commands? Check [this](priv/howto/how-to-add-a-new-command.md)**
 ## Contribution 🫶
 Want to improve this? Great news! I'm open to any change that can improve this, but I have some rules:
 1. Of course, you can fork it, but if you think that you have an idea, and you want to contribute here, just open an issue,
