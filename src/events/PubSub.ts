@@ -4,12 +4,14 @@ import { MessageType } from "../utils/MessageTypes";
 import { ChatInputCommandInteraction } from "discord.js";
 import StopCommandListener from "./StopCommandListener";
 import Listener from "./Listener";
+import ResumeCommandListener from "./ResumeCommandListener";
 
 const interactionResponseEmitter = new events.EventEmitter();
 
 const LISTENERS: Listener[] = [
     new PlayCommandListener(interactionResponseEmitter),
-    new StopCommandListener(interactionResponseEmitter)
+    new StopCommandListener(interactionResponseEmitter),
+    new ResumeCommandListener(interactionResponseEmitter)
 ];
 
 export interface MessageContent {
