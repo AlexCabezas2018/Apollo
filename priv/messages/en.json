@@ -3,8 +3,6 @@
   "UNEXPECTED_ERROR": "Unexpected error. Talk to a bot admin.",
   "USER_NOT_IN_VOICE_CHANNEL": "You must be in the same voice channel as me to invoke me!",
 
-  "HELLO_COMMAND_SUCCESS_RESPONSE": "Hello World!",
-
   "PLAY_COMMAND_WRONG_URL": "I can't recognize this URL. Did you write it correctly?",
   "PLAY_COMMAND_RESOURCE_ERROR": "Error while getting audio resource. Please try again.",
   "PLAY_COMMAND_SUCCESS_RESPONSE": "Playing #$#!",
@@ -19,5 +17,8 @@
   "RESUME_COMMAND_NOTHING_TO_RESUME": "Nothing to resume! Did you try to play something first?",
   "RESUME_COMMAND_SUCCESS_RESPONSE": "Resumed!",
 
-  "CHANGE_LANGUAGE_COMMAND_SUCCESS_RESPONSE": "Nice! I will talk in this language now on!"
+  "CHANGE_LANGUAGE_COMMAND_SUCCESS_RESPONSE": "Nice! I will talk in this language now on!",
+
+  "QUEUE_COMMAND_NO_QUEUE_RESPONSE": "There is no queue!",
+  "QUEUE_COMMAND_SUCCESS_RESPONSE": "Here is que queue: \n#$#"
 }

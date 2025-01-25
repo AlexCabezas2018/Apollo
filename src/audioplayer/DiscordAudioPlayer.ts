@@ -30,6 +30,10 @@ export default class DiscordAudioPlayer {
         this.setup();
     }
 
+    get queue(): AudioData[] {
+        return this.songsQueue;
+    }
+
     async play(): Promise<void> {
         const audioData = this.songsQueue.shift();
         const audioResource = createAudioResource(audioData.audioResource)
@@ -54,6 +58,7 @@ export default class DiscordAudioPlayer {
 
     stop(): boolean {
         if (this.audioPlayer.state.status == AudioPlayerStatus.Idle) return false;
+        this.songsQueue = [];
         this.audioPlayer.stop(true);
         return true;
     }
@@ -74,11 +79,13 @@ export default class DiscordAudioPlayer {
     private setup(): void {
         this.voiceConnection.on(VoiceConnectionStatus.Disconnected, () => {
             this.voiceConnection.destroy();
+            AudioPlayers.getInstance().removePlayer(this.voiceConnection.joinConfig.guildId);
         });
 
         this.audioPlayer.on('error', error => {
             Logger.error(error);
             this.voiceConnection.destroy();
+            AudioPlayers.getInstance().removePlayer(this.voiceConnection.joinConfig.guildId);
         });
 
         const subscription = this.voiceConnection.subscribe(this.audioPlayer);

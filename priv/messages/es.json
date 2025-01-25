@@ -1,23 +1,24 @@
 {
   "COMMAND_NOT_FOUND": "Comando no encontrado.",
   "UNEXPECTED_ERROR": "Error inesperado. Contacta con un administrador.",
-  "USER_NOT_IN_VOICE_CHANNEL": "Debes estar en el mismo canal que yo para invocarme!",
-
-  "HELLO_COMMAND_SUCCESS_RESPONSE": "Hola mundo!",
+  "USER_NOT_IN_VOICE_CHANNEL": "¡Debes estar en el mismo canal que yo para invocarme!",
 
   "PLAY_COMMAND_WRONG_URL": "No reconozco esta URL. ¿La has introducido correctamente?",
   "PLAY_COMMAND_RESOURCE_ERROR": "Error mientras se obtenia el recurso. Intentalo de nuevo.",
-  "PLAY_COMMAND_SUCCESS_RESPONSE": "Reproduciendo #$#!",
-  "PLAY_COMMAND_ADDED_TO_QUEUE_SUCCESS": "Añadido #$# a la cola!",
+  "PLAY_COMMAND_SUCCESS_RESPONSE": "¡Reproduciendo #$#!",
+  "PLAY_COMMAND_ADDED_TO_QUEUE_SUCCESS": "¡Añadido #$# a la cola!",
 
   "STOP_COMMAND_NOTHING_TO_STOP": "No hay nada que parar, ¿Has probado a reproducir algo?",
-  "STOP_COMMAND_SUCCESS_RESPONSE": "Hasta la vista!",
+  "STOP_COMMAND_SUCCESS_RESPONSE": "¡Hasta la próxima!",
 
   "PAUSE_COMMAND_NOTHING_TO_PAUSE": "Nada que pausar, ¿Has probado a reproducir algo?",
-  "PAUSE_COMMAND_SUCCESS_RESPONSE": "Pausado!",
+  "PAUSE_COMMAND_SUCCESS_RESPONSE": "¡Pausado!",
 
   "RESUME_COMMAND_NOTHING_TO_RESUME": "Nada que reanudar, ¿Has probado a reproducir algo?",
-  "RESUME_COMMAND_SUCCESS_RESPONSE": "Reanudado!",
+  "RESUME_COMMAND_SUCCESS_RESPONSE": "¡Reanudado!",
 
-  "CHANGE_LANGUAGE_COMMAND_SUCCESS_RESPONSE": "Genial! Hablaré en este idioma a partir de ahora!"
+  "CHANGE_LANGUAGE_COMMAND_SUCCESS_RESPONSE": "¡Genial! ¡Hablaré en este idioma a partir de ahora!",
+
+  "QUEUE_COMMAND_NO_QUEUE_RESPONSE": "¡No hay cola de reproducción!",
+  "QUEUE_COMMAND_SUCCESS_RESPONSE": "Ahora mismo la cola pinta así: \n#$#"
 }
