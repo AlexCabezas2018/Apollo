@@ -6,16 +6,17 @@ import {
     VoiceConnectionStatus
 } from '@discordjs/voice'
 import { Logger } from '../utils/Logger'
-import { AudioData } from "../provider/AudioProvider";
 import AudioPlayers from "./AudioPlayers";
 import { ChatInputCommandInteraction } from 'discord.js';
 import { MessageType } from "../utils/MessageTypes";
+import { AudioData } from "../provider/AudioData";
 import { Publisher } from "../events/PubSub";
+import SongsQueue from "./SongsQueue";
 
 export default class DiscordAudioPlayer {
     private voiceConnection: VoiceConnection;
     private readonly audioPlayer: AudioPlayer;
-    private songsQueue: AudioData[];
+    private readonly queue: SongsQueue;
     private interaction: ChatInputCommandInteraction;
 
 
@@ -23,17 +24,17 @@ export default class DiscordAudioPlayer {
         this.voiceConnection = voiceConnection;
         this.audioPlayer = createAudioPlayer();
         this.interaction = interaction;
-        this.songsQueue = [];
+        this.queue = new SongsQueue();
 
         this.setup();
     }
 
-    get queue(): AudioData[] {
-        return this.songsQueue;
+    get songs(): SongsQueue {
+        return this.queue;
     }
 
     async play(interaction: ChatInputCommandInteraction = this.interaction): Promise<void> {
-        const audioData = this.songsQueue.shift();
+        const audioData = this.queue.nextSong();
         const audioResource = createAudioResource(audioData.audioResource)
         this.audioPlayer.play(audioResource);
 
@@ -43,13 +44,13 @@ export default class DiscordAudioPlayer {
     }
 
     addToQueue(audioData: AudioData): void {
-        this.songsQueue.push(audioData);
-        Logger.debug(`Current song queue size: ${this.songsQueue.length}`);
+        this.queue.addSong(audioData);
+        Logger.debug(`Current song queue size: ${this.queue.size()}`);
     }
 
     stop(): boolean {
         if (this.audioPlayer.state.status == AudioPlayerStatus.Idle) return false;
-        this.songsQueue = [];
+        this.queue.clean();
         this.audioPlayer.stop(true);
         return true;
     }
@@ -82,7 +83,7 @@ export default class DiscordAudioPlayer {
         const subscription = this.voiceConnection.subscribe(this.audioPlayer);
 
         this.audioPlayer.on(AudioPlayerStatus.Idle, async () => {
-            if (this.songsQueue.length > 0) {
+            if (!this.queue.isEmpty()) {
                 Logger.debug('Player has more songs. Playing next.');
                 await this.play();
                 return;

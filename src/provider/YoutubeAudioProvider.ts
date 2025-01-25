@@ -1,6 +1,7 @@
 import ytdl from '@distube/ytdl-core'
 import { Logger } from '../utils/Logger'
-import AudioProvider, { AudioData, AudioProviderResponseStatus } from "./AudioProvider";
+import AudioProvider from "./AudioProvider";
+import { AudioProviderResponseStatus, AudioData } from "./AudioData";
 
 export default class YoutubeAudioProvider implements AudioProvider {
     async get(url: string): Promise<AudioData> {
