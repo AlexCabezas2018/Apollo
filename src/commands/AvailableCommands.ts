@@ -6,6 +6,7 @@ import ResumeCommand from "./ResumeCommand";
 import ChangeLanguageCommand from "./ChangeLanguageCommand";
 import QueueCommand from "./QueueCommand";
 import NextCommand from "./NextCommand";
+import SelectCommand from "./SelectCommand";
 
 export const COMMANDS = new Map<string, Command>([
     ['play', new PlayCommand()],
@@ -15,4 +16,5 @@ export const COMMANDS = new Map<string, Command>([
     ['lang', new ChangeLanguageCommand()],
     ['queue', new QueueCommand()],
     ['next', new NextCommand()],
+    ['select', new SelectCommand()],
 ])

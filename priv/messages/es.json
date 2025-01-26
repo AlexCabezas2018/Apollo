@@ -24,5 +24,8 @@
   "QUEUE_COMMAND_SUCCESS_RESPONSE": "Ahora mismo la cola pinta así: \n#$#",
 
   "NEXT_COMMAND_NO_PLAYER": "No hay sesión activa en este momento. Prueba /play [url]",
-  "NEXT_COMMAND_NO_SONGS_IN_QUEUE": "La cola está vacía. Saliendo. Hasta la próxima!"
+  "NEXT_COMMAND_NO_SONGS_IN_QUEUE": "La cola está vacía. Saliendo. Hasta la próxima!",
+
+  "SELECT_COMMAND_NO_SEARCH": "No has realizado ninguna busqueda. ¿Has probado /play search youtube|soundcloud [term]?",
+  "SELECT_COMMAND_OPTION_OUT_OF_RANGE": "¡Escoge una opción válida! (1-#$#)"
 }

@@ -43,11 +43,14 @@ export default class PlayCommandListener extends Listener {
             const preferences = GuildPreferences.getInstance().getPreferences(interaction.guildId);
 
             await interaction.reply(
-                Messages.getAndReplace(
-                    preferences,
-                    MessageType.PLAY_COMMAND_SEARCH_BY_TERM_SUCCESS,
-                    content.metaData
-                )
+                {
+                    content: Messages.getAndReplace(
+                        preferences,
+                        MessageType.PLAY_COMMAND_SEARCH_BY_TERM_SUCCESS,
+                        content.metaData
+                    ),
+                    flags: MessageFlagsBitField.Flags.Ephemeral
+                }
             );
         });
 

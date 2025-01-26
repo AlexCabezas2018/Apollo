@@ -24,5 +24,8 @@
   "QUEUE_COMMAND_SUCCESS_RESPONSE": "Here is the queue: \n#$#",
 
   "NEXT_COMMAND_NO_PLAYER": "There is no active player. Try /play [url]",
-  "NEXT_COMMAND_NO_SONGS_IN_QUEUE": "Queue is empty. Exiting. Bye!"
+  "NEXT_COMMAND_NO_SONGS_IN_QUEUE": "Queue is empty. Exiting. Bye!",
+
+  "SELECT_COMMAND_NO_SEARCH": "No search done! Did you try /play search youtube|soundcloud [term]?",
+  "SELECT_COMMAND_OPTION_OUT_OF_RANGE": "Choose a valid option! (1-#$#)"
 }
