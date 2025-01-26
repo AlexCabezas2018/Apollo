@@ -8,12 +8,21 @@ import { AudioProviderFactory } from "../provider/AudioProviderFactory";
 import { Publisher } from "../events/PubSub";
 import { MessageType } from '../utils/MessageTypes'
 import { AudioProviderResponseStatus } from "../provider/AudioData";
+import { SearchInput } from "../seachprovider/SearchInput";
+import { SearchProviderDelegator } from "../seachprovider/SearchProvider";
 
 export default class PlayCommand extends Command {
     async run(input: CommandInput): Promise<void> {
         const { interaction, channelId, interactionGuild } = input
 
         const url = this.getUrl(interaction)
+        if (!url) {
+            const searchInput = this.getSearchOptions(interaction);
+            const results = await SearchProviderDelegator.search(searchInput);
+            Publisher.publishEvent(MessageType.PLAY_COMMAND_SEARCH_BY_TERM_SUCCESS, { interaction, metaData: results });
+            return;
+        }
+
         const audioProvider = AudioProviderFactory.getProvider(url);
         if (!audioProvider) {
             Publisher.publishEvent(MessageType.PLAY_COMMAND_WRONG_URL, { interaction });
@@ -48,9 +57,26 @@ export default class PlayCommand extends Command {
     }
 
     private getUrl(interaction: CommandInteraction): string {
-        return String(
-            interaction.options.data
-                .find(option => option.name == 'url')?.value
-        ) || "n/a";
+        const urlOption = interaction.options.data
+            .find(option => option.name == 'url')
+
+        if (!urlOption) {
+            return undefined;
+        }
+
+        return String(urlOption.options.find(option => option.name == "term")?.value)
+    }
+
+    private getSearchOptions(interaction: CommandInteraction): SearchInput {
+        const searchOptions = interaction.options.data
+            .find(option => option.name == 'search')
+
+        const searchProviderOptions = searchOptions.options[0]
+        const term = String(searchProviderOptions.options.find(option => option.name == 'term').value);
+
+        return {
+            term: term,
+            provider: searchProviderOptions.name
+        }
     }
 }

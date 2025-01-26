@@ -3,13 +3,52 @@
     {
       "name": "play",
       "description": "Plays a song",
-      "type": 1,
       "options": [
         {
           "name": "url",
-          "type": 3,
-          "description": "A Youtube or Soundcloud valid URL",
-          "required": true
+          "type": 1,
+          "description": "Search by URL",
+          "options": [
+            {
+              "name": "term",
+              "type": 3,
+              "description": "The term to search",
+              "required": true
+            }
+          ]
+        },
+        {
+          "name": "search",
+          "type": 2,
+          "description": "Search by term",
+          "options": [
+            {
+              "name": "youtube",
+              "type": 1,
+              "description": "Search in Youtube for a term",
+              "options": [
+                {
+                  "name": "term",
+                  "type": 3,
+                  "description": "The term to search",
+                  "required": true
+                }
+              ]
+            },
+            {
+              "name": "soundcloud",
+              "type": 1,
+              "description": "Search in Soundcloud for a term",
+              "options": [
+                {
+                  "name": "term",
+                  "type": 3,
+                  "description": "The term to search",
+                  "required": true
+                }
+              ]
+            }
+          ]
         }
       ]
     },

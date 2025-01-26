@@ -38,6 +38,19 @@ export default class PlayCommandListener extends Listener {
             );
         });
 
+        this.eventEmitter.on(MessageType.PLAY_COMMAND_SEARCH_BY_TERM_SUCCESS, async (content: MessageContent) => {
+            const { interaction } = content;
+            const preferences = GuildPreferences.getInstance().getPreferences(interaction.guildId);
+
+            await interaction.reply(
+                Messages.getAndReplace(
+                    preferences,
+                    MessageType.PLAY_COMMAND_SEARCH_BY_TERM_SUCCESS,
+                    content.metaData
+                )
+            );
+        });
+
         this.eventEmitter.on(MessageType.PLAY_COMMAND_WRONG_URL, async (content: MessageContent) => {
             const { interaction } = content;
             const preferences = GuildPreferences.getInstance().getPreferences(interaction.guildId);

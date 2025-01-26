@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@discordjs/voice": "^0.18.0",
+    "@distube/soundcloud": "^2.0.4",
     "@distube/ytdl-core": "^4.15.9",
     "discord.js": "^14.17.3",
     "dotenv": "^16.0.3",
@@ -21,6 +22,7 @@
     "npm": "^11.0.0",
     "soundcloud-downloader": "^1.0.0",
     "typescript-formatter": "^7.2.2",
+    "youtube-search-api": "^1.2.2",
     "ytdl-core": "npm:@distube/ytdl-core@^4.15.8"
   },
   "devDependencies": {
