@@ -1,4 +1,5 @@
 export interface SearchInput {
     term: string,
-    provider: string
+    provider: string,
+    guildId: string
 }

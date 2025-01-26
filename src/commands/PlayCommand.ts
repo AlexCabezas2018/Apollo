@@ -76,7 +76,8 @@ export default class PlayCommand extends Command {
 
         return {
             term: term,
-            provider: searchProviderOptions.name
+            provider: searchProviderOptions.name,
+            guildId: interaction.guildId
         }
     }
 }
