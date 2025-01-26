@@ -1,4 +1,5 @@
 import { Logger } from "../utils/Logger";
+import { SearchResult } from "../seachprovider/SearchResult";
 
 export enum SupportedLanguages {
     SPANISH = "es",
@@ -6,8 +7,11 @@ export enum SupportedLanguages {
 }
 
 export interface Preferences {
-    language: SupportedLanguages;
+    language: SupportedLanguages,
+    searchResults: SearchResult[]
 }
+
+const DEFAULT_PREFERENCES: Preferences = { language: SupportedLanguages.ENGLISH, searchResults: [] }
 
 export class GuildPreferences {
     static instance: GuildPreferences;
@@ -25,17 +29,15 @@ export class GuildPreferences {
     getPreferences(guildId: string | null): Preferences {
         if (!guildId) {
             Logger.error("Error getting guild preferences. Returning default values.");
-            return { language: SupportedLanguages.ENGLISH };
+            return DEFAULT_PREFERENCES;
         }
 
         const preferences = this.preferences.get(guildId);
         if (!preferences) {
-            const defaultPreferences = {
-                language: SupportedLanguages.ENGLISH
-            }
-            this.preferences.set(guildId, defaultPreferences);
-            return defaultPreferences;
+            this.preferences.set(guildId, DEFAULT_PREFERENCES);
+            return DEFAULT_PREFERENCES;
         }
+
         return preferences;
     }
 

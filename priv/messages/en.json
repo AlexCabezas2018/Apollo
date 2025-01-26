@@ -7,6 +7,7 @@
   "PLAY_COMMAND_RESOURCE_ERROR": "Error while getting audio resource. Please try again.",
   "PLAY_COMMAND_SUCCESS_RESPONSE": "Playing #$#!",
   "PLAY_COMMAND_ADDED_TO_QUEUE_SUCCESS": "Added #$# to que queue!",
+  "PLAY_COMMAND_SEARCH_BY_TERM_SUCCESS": "Here is what I found!\n\n#$#\nType /select [songNumber] to add it to the playlist!",
 
   "STOP_COMMAND_NOTHING_TO_STOP": "Nothing to stop! Did you try to play something first?",
   "STOP_COMMAND_SUCCESS_RESPONSE": "See you next time!",

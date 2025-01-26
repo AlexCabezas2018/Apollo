@@ -7,6 +7,7 @@
   "PLAY_COMMAND_RESOURCE_ERROR": "Error mientras se obtenia el recurso. Intentalo de nuevo.",
   "PLAY_COMMAND_SUCCESS_RESPONSE": "¡Reproduciendo #$#!",
   "PLAY_COMMAND_ADDED_TO_QUEUE_SUCCESS": "¡Añadido #$# a la cola!",
+  "PLAY_COMMAND_SEARCH_BY_TERM_SUCCESS": "¡Esto es lo que he encontrado!\n\n#$#\nEscribe /select [numero] para añadirlo a la playlist",
 
   "STOP_COMMAND_NOTHING_TO_STOP": "No hay nada que parar, ¿Has probado a reproducir algo?",
   "STOP_COMMAND_SUCCESS_RESPONSE": "¡Hasta la próxima!",
