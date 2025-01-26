@@ -99,6 +99,19 @@
       "name": "next",
       "description": "Plays the next song in the queue. Exits if no more music to play.",
       "type": 1
+    },
+    {
+      "name": "select",
+      "description": "Selects an option from the previous search results.",
+      "type": 1,
+      "options": [
+        {
+          "name": "number",
+          "type": 4,
+          "description": "the choice number",
+          "required": true
+        }
+      ]
     }
   ]
 }

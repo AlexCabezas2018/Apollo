@@ -13,7 +13,7 @@ import { SearchProviderDelegator } from "../seachprovider/SearchProvider";
 
 export default class PlayCommand extends Command {
     async run(input: CommandInput): Promise<void> {
-        const { interaction, channelId, interactionGuild } = input
+        const { interaction } = input
 
         const url = this.getUrl(interaction)
         if (!url) {
@@ -22,6 +22,12 @@ export default class PlayCommand extends Command {
             Publisher.publishEvent(MessageType.PLAY_COMMAND_SEARCH_BY_TERM_SUCCESS, { interaction, metaData: results });
             return;
         }
+
+        await this.play(url, input);
+    }
+
+    async play(url: string, input: CommandInput): Promise<void> {
+        const { interaction, channelId, interactionGuild } = input
 
         const audioProvider = AudioProviderFactory.getProvider(url);
         if (!audioProvider) {

@@ -11,6 +11,7 @@ import QueueCommandListener from "./QueueCommandListener";
 import PauseCommandListener from "./PauseCommandListener";
 import NextCommandListener from "./NextCommandListener";
 import ChangeLanguageCommandListener from "./ChangeLanguageCommandListener";
+import SelectCommandListener from "./SelectCommandListener";
 
 const interactionResponseEmitter = new events.EventEmitter();
 
@@ -21,7 +22,8 @@ const LISTENERS: Listener[] = [
     new QueueCommandListener(interactionResponseEmitter),
     new PauseCommandListener(interactionResponseEmitter),
     new NextCommandListener(interactionResponseEmitter),
-    new ChangeLanguageCommandListener(interactionResponseEmitter)
+    new ChangeLanguageCommandListener(interactionResponseEmitter),
+    new SelectCommandListener(interactionResponseEmitter)
 ];
 
 export interface MessageContent {
