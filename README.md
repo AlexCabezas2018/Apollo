@@ -13,6 +13,18 @@ music bots!
 4. [Contribution](#contribution-)
 
 ### Local installation 💾
+#### With docker
+
+First, you need to download the project, as you may assume is as easy as:
+```
+git clone https://github.com/alexcabezasg/apollo.git
+```
+
+1. Install docker in your local machine. You can do it by following the [official site steps](https://docs.docker.com/engine/install/)
+2. Just go to the root directory and run `docker-compose up [-d]` (Use `-d` if you want to run in background). This command will execute
+everything for you. The bot will be available. Also, you will have Grafana ready in port `3000`!
+
+#### In local
 As every node project, you must have `node.js` (>= 22.13) and `npm` (>= 10.9) installed in your local machine.
 
 **Note**: This library makes usage of the library [`discord.js`](https://discord.js.org/), so as long as this library is maintained,
