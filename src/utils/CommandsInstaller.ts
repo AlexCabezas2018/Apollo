@@ -1,5 +1,5 @@
 import commands from '../../priv/commands.json'
-import { Config } from '../../config'
+import { Config } from '../../Config'
 import { Logger } from './Logger'
 import { REST, Routes } from 'discord.js'
 

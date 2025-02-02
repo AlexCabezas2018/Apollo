@@ -19,6 +19,6 @@ export default class NextCommand extends Command {
             return;
         }
 
-        await audioPlayer.play(interaction);
+        await audioPlayer.next(interaction);
     }
 }

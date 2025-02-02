@@ -3,7 +3,8 @@ import 'dotenv/config'
 interface ConfigAttributes {
     applicationId: string
     publicKey: string
-    botToken: string
+    botToken: string,
+    metricsPort: string
 }
 
 const evaluate = (value: any, isRequired: boolean, defValue?: any): string => {
@@ -18,5 +19,6 @@ const evaluate = (value: any, isRequired: boolean, defValue?: any): string => {
 export const Config: ConfigAttributes = {
     applicationId: evaluate(process.env.APPLICATION_ID, true),
     publicKey: evaluate(process.env.PUBLIC_KEY, true),
-    botToken: evaluate(process.env.BOT_TOKEN, true)
+    botToken: evaluate(process.env.BOT_TOKEN, true),
+    metricsPort: evaluate(process.env.METRICS_PORT, false, 3001)
 }

@@ -16,6 +16,6 @@
     "src/**/*.ts",
     "src/*.ts",
     "index.ts",
-    "config.ts"
+    "Config.ts"
   ]
 }
