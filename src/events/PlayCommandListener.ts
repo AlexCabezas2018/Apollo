@@ -18,11 +18,7 @@ export default class PlayCommandListener extends Listener {
                 content.metaData.title
             );
 
-            if (interaction.replied) {
-                await interaction.followUp(message)
-            } else {
-                await interaction.reply(message);
-            }
+            await interaction.reply(message);
         });
 
         this.eventEmitter.on(MessageType.PLAY_COMMAND_ADDED_TO_QUEUE_SUCCESS, async (content: MessageContent) => {

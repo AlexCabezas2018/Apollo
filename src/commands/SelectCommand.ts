@@ -30,6 +30,8 @@ export default class SelectCommand extends Command {
         GuildPreferences.getInstance().updatePreferences(interactionGuild.id, preferences);
 
         await playCommand.play(searchResult.url, input);
+
+        Publisher.publishEvent(MessageType.SELECT_COMMAND_SUCCESS_RESPONSE, { interaction });
     }
 
     private getOption(interaction: ChatInputCommandInteraction): number {

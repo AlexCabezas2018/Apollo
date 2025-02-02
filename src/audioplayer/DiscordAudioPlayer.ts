@@ -33,12 +33,22 @@ export default class DiscordAudioPlayer {
         return this.queue;
     }
 
-    async play(interaction: ChatInputCommandInteraction = this.interaction): Promise<void> {
+    async play(interaction: ChatInputCommandInteraction = this.interaction) {
         const audioData = this.queue.nextSong();
         const audioResource = createAudioResource(audioData.audioResource)
         this.audioPlayer.play(audioResource);
 
         Publisher.publishEvent(MessageType.PLAY_COMMAND_SUCCESS_RESPONSE, {
+            interaction, metaData: audioData
+        });
+    }
+
+    async next(interaction: ChatInputCommandInteraction = this.interaction): Promise<void> {
+        const audioData = this.queue.nextSong();
+        const audioResource = createAudioResource(audioData.audioResource)
+        this.audioPlayer.play(audioResource);
+
+        Publisher.publishEvent(MessageType.NEXT_COMMAND_SUCCESS_RESPONSE, {
             interaction, metaData: audioData
         });
     }
@@ -85,7 +95,7 @@ export default class DiscordAudioPlayer {
         this.audioPlayer.on(AudioPlayerStatus.Idle, async () => {
             if (!this.queue.isEmpty()) {
                 Logger.debug('Player has more songs. Playing next.');
-                await this.play();
+                await this.next();
                 return;
             }
 

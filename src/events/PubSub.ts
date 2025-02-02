@@ -12,8 +12,10 @@ import PauseCommandListener from "./PauseCommandListener";
 import NextCommandListener from "./NextCommandListener";
 import ChangeLanguageCommandListener from "./ChangeLanguageCommandListener";
 import SelectCommandListener from "./SelectCommandListener";
+import MetricsListener from "./MetricsListener";
 
 const interactionResponseEmitter = new events.EventEmitter();
+const metricsEmitter = new events.EventEmitter();
 
 const LISTENERS: Listener[] = [
     new PlayCommandListener(interactionResponseEmitter),
@@ -23,7 +25,8 @@ const LISTENERS: Listener[] = [
     new PauseCommandListener(interactionResponseEmitter),
     new NextCommandListener(interactionResponseEmitter),
     new ChangeLanguageCommandListener(interactionResponseEmitter),
-    new SelectCommandListener(interactionResponseEmitter)
+    new SelectCommandListener(interactionResponseEmitter),
+    new MetricsListener(metricsEmitter)
 ];
 
 export interface MessageContent {
@@ -41,5 +44,6 @@ export const PubSub = {
 export const Publisher = {
     publishEvent: (messageType: MessageType, content: MessageContent) => {
         interactionResponseEmitter.emit(messageType, content);
+        metricsEmitter.emit(messageType);
     }
 }

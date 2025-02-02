@@ -7,6 +7,8 @@ services:
       context: .
       dockerfile: ./Dockerfile
     restart: 'on-failure'
+    ports:
+      - '3001:3001'
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
     container_name: cadvisor

@@ -1,5 +1,5 @@
 import { Client, Events, GatewayIntentBits } from 'discord.js'
-import { Config } from '../config'
+import { Config } from '../Config'
 import { COMMANDS } from './commands/AvailableCommands'
 import { Messages } from "./utils/Messages";
 import { GuildPreferences } from "./preferences/GuildPreferences";
