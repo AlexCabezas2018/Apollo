@@ -7,7 +7,7 @@
   "PLAY_COMMAND_RESOURCE_ERROR": "Error while getting audio resource. Please try again.",
   "PLAY_COMMAND_SUCCESS_RESPONSE": "\uD83C\uDFB5 **Playing** _#$#_! \uD83C\uDFB5",
   "PLAY_COMMAND_ADDED_TO_QUEUE_SUCCESS": "\uD83C\uDFB5 **Added** _#$#_ **to que queue!**\uD83C\uDFB5",
-  "PLAY_COMMAND_SEARCH_BY_TERM_SUCCESS": "Here is what I found!\n\n#$#\nType /select [songNumber] to add it to the playlist!",
+  "PLAY_COMMAND_SEARCH_BY_TERM_SUCCESS": "\uD83D\uDD0E Here is what I found!\n\n#$#\nType `/select [songNumber]` to add it to the playlist!",
 
   "STOP_COMMAND_NOTHING_TO_STOP": "Nothing to stop! Did you try to play something first?",
   "STOP_COMMAND_SUCCESS_RESPONSE": "See you next time!",

@@ -32,9 +32,9 @@ export default class SongsQueue {
 
         return this.queue.reduce((acc, song, currentIndex) => {
             if (currentIndex == 0) {
-                return acc + `${currentIndex + 1} (next) - ${song.title}\n`
+                return acc + `**${currentIndex + 1}** (next) - ${song.title}\n`
             }
-            return acc + `${currentIndex + 1} - ${song.title}\n`;
+            return acc + `${currentIndex + 1} - _${song.title}_\n`;
         }, "");
     }
 }
