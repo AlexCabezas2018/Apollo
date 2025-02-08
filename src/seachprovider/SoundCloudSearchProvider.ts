@@ -13,6 +13,7 @@ export default class SoundCloudSearchProvider implements SearchProvider {
             return {
                 title: result.name,
                 url: result.url,
+                duration: result.formattedDuration
             }
         })
     }

@@ -22,7 +22,7 @@ export const SearchProviderDelegator = {
 
 const toPrettyString = (results: SearchResult[]): string => {
     return results.reduce((acc, result, currentIndex) => {
-        return acc + `${currentIndex + 1}. ${result.title}\n`
+        return acc + `**${currentIndex + 1}**. _${result.title}_ \`${result.duration}\`\n`
     }, "");
 }
 

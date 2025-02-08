@@ -12,6 +12,7 @@ export default class YoutubeSearchProvider implements SearchProvider {
             return {
                 title: item.title,
                 url: YOUTUBE_PREFIX + item.id,
+                duration: item.length.simpleText
             }
         });
     }
