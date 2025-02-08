@@ -5,18 +5,19 @@ import SoundcloudAudioProvider from "./SoundcloudAudioProvider";
 interface ProviderFactorEntry {
     key: string;
     provider: AudioProvider;
+    providerName: string;
 }
 
 const PROVIDERS: ProviderFactorEntry[] = [
-    { key: "youtube", provider: new YoutubeAudioProvider() },
-    { key: "soundcloud", provider: new SoundcloudAudioProvider() },
+    { key: "youtube", provider: new YoutubeAudioProvider(), providerName: "youtube" },
+    { key: "soundcloud", provider: new SoundcloudAudioProvider(), providerName: "soundcloud" },
 ];
 
 export const AudioProviderFactory = {
-    getProvider(url: string): AudioProvider | undefined {
+    getProvider(url: string): ProviderFactorEntry | undefined {
         return PROVIDERS.find((provider) => {
             return url.includes(provider.key);
-        })?.provider;
+        });
     }
 }
 
