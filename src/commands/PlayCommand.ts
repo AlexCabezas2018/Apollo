@@ -10,6 +10,7 @@ import { MessageType } from '../utils/MessageTypes'
 import { AudioProviderResponseStatus } from "../provider/AudioData";
 import { SearchInput } from "../seachprovider/SearchInput";
 import { SearchProviderDelegator } from "../seachprovider/SearchProvider";
+import { Metrics } from "../metrics/Metrics";
 
 export default class PlayCommand extends Command {
     async run(input: CommandInput): Promise<void> {
@@ -18,7 +19,9 @@ export default class PlayCommand extends Command {
         const url = this.getUrl(interaction)
         if (!url) {
             const searchInput = this.getSearchOptions(interaction);
-            const results = await SearchProviderDelegator.search(searchInput);
+            const results = await Metrics.measureTime(async () =>
+                await SearchProviderDelegator.search(searchInput), { functionName: searchInput.provider, commandName: "search" }
+            );
             Publisher.publishEvent(MessageType.PLAY_COMMAND_SEARCH_BY_TERM_SUCCESS, { interaction, metaData: results });
             return;
         }
@@ -35,7 +38,10 @@ export default class PlayCommand extends Command {
             return;
         }
 
-        const audioProviderResponse = await audioProvider.get(url);
+        const audioProviderResponse = await Metrics.measureTime(async () =>
+            await audioProvider.provider.get(url), { functionName: audioProvider.providerName, commandName: "play" }
+        );
+
         if (audioProviderResponse.status != AudioProviderResponseStatus.SUCCESS) {
             Publisher.publishEvent(MessageType.PLAY_COMMAND_RESOURCE_ERROR, { interaction });
             return;

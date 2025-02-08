@@ -1,5 +1,5 @@
 import express from 'express'
-import { Metrics } from './Metrics';
+import { MetricsExposer } from './Metrics';
 import { Config } from "../../Config";
 
 
@@ -8,7 +8,7 @@ export const Server = {
         const app = express();
 
         app.get('/metrics', async (_request, response) => {
-            const metrics = await Metrics.expose()
+            const metrics = await MetricsExposer.expose()
 
             response.setHeader('Content-Type', metrics.contentType);
             response.end(metrics.data);
