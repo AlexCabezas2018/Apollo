@@ -2,7 +2,7 @@ import { MessageType } from "../utils/MessageTypes";
 import Listener from "./Listener";
 import { GuildPreferences } from "../preferences/GuildPreferences";
 import { Messages } from "../utils/Messages";
-import { MessageFlagsBitField } from "discord.js";
+import { EmbedBuilder, MessageFlagsBitField } from "discord.js";
 import { MessageContent } from "./PubSub";
 import { Logger } from "../utils/Logger";
 
@@ -19,7 +19,7 @@ export default class NextCommandListener extends Listener {
             );
 
             if (interaction.replied) {
-                await interaction.followUp(message);
+                await interaction.channel.send(message);
                 return;
             }
 
