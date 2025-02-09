@@ -69,8 +69,8 @@ npm run register
 
 <img src="docs/images/register_commands.png" width="400">
 
-4. Just run `npm start` and your back will start to listen to your bot events! (Please, invite your factory new Bot to any server
-please, he wants to participate 😂)
+4. Just run `npm start` and your back will start to listen to your bot events! (Please, invite your factory new Bot to 
+any server, he wants to participate 😂)
 
 <img src="docs/images/start_success.png" width="400">
 
@@ -94,11 +94,16 @@ Here are other util commands that can be invoked via `npm`:
 4. `/resume`: Resumes previous paused content.
 <img src="docs/gifs/resume.gif" width="400">
 
-5. `/queue`: Displays the information of que queue.
+5. `/next`: Moves to the next song in the queue. If the queue is empty, it exits.
+<img src="docs/gifs/next.gif" width="400">
+
+6. `/queue`: Displays the information of que queue.
 <img src="docs/gifs/queue.gif" width="400">
 
-6. `/lang [language]`: It changes the language of the bot (check [How to add a new language](/docs/howto/how-to-add-a-new-language.md))
+7. `/lang [language]`: It changes the language of the bot (check [How to add a new language](/docs/howto/how-to-add-a-new-language.md))
 <img src="docs/gifs/lang.gif" width="400">
+
+### 🤓 Do you want to know more details about how is this app build? Check out the [geeky section](/docs/geeky/index.md)!
 
 ### **Do you want to add new commands? Check [this](docs/howto/how-to-add-a-new-command.md)**
 ## Contribution 🫶
